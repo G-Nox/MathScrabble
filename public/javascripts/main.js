@@ -1,6 +1,6 @@
 //document.getElementById("resizebtn").addEventListener("click",resize)
 
-document.getElementById("resizebtn").onclick = resize
+//document.getElementById("resizebtn").onclick = resize
 
 let arr = document.getElementsByClassName("inHand")
 let cellarr = document.getElementsByClassName("myCell")
