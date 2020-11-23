@@ -1,5 +1,3 @@
-document.getElementById("resize").onclick = showbutton
-
 document.getElementById("3x3").onclick = function () {
     return resize(3)
 }
@@ -10,6 +8,10 @@ document.getElementById("9x9").onclick = function () {
 document.getElementById("15x15").onclick = function () {
     return resize(15)
 }
+
+// document.getElementById("submit").onclick = function () {
+//     document.getElementById("submit").attributes.add
+// }
 
 let handarr = document.getElementsByClassName("inHand")
 let cellarr = document.getElementsByClassName("myCell")
@@ -45,8 +47,6 @@ function recolor(element, arr) {
         arr[i].classList.remove("activeDiv")
     }
     element.classList.add("activeDiv")
-
-
 }
 
 function setCard() {
@@ -82,27 +82,9 @@ function isActive(array) {
 
 }
 
-function showbutton() {
-    let buttons = document.getElementsByClassName("possibleSize")
-    if (buttons[0].classList.contains("d-none")) {
-        for (var i = 0; i < buttons.length; i++) {
-            buttons[i].classList.remove("d-none")
-        }
-    } else {
-        for (var i = 0; i < buttons.length; i++) {
-            buttons[i].classList.add("d-none")
-        }
-    }
-}
-
 function resize(size) {
     document.location.replace("/scrabble/resize/" + size)
     handarr = document.getElementsByClassName("inHand")
     cellarr = document.getElementsByClassName("myCell")
     rowarr = document.getElementsByClassName("myRow")
-
-    let buttons = document.getElementsByClassName("possibleSize")
-    for (var i = 0; i < buttons.length; i++) {
-        buttons[i].classList.add("d-none")
-    }
 }
