@@ -46,15 +46,14 @@ h1, h2, h3, h4, h5, h6 {
     margin: 3em;
     padding: 1em 1.2em;
     width: 100%;
-    background-color: white;
-    box-shadow: 0px 0px 10px 8px rgba(100, 100, 100, .2);
-    border-radius: 1em;
+    background: #f8f8e4;
+    box-shadow: 3px 3px 5px 2px rgba(100, 100, 100, 0.15);
 }
 
 .myGrid {
     display: inline-flex;
     background: #f8f8e4;
-    box-shadow: 0px 0px 10px 8px rgba(100, 100, 100, .2);
+    box-shadow: 3px 3px 5px 2px rgba(100, 100, 100, 0.15);
     grid-gap: 0;
     padding: .5em;
 }
@@ -127,17 +126,23 @@ h1, h2, h3, h4, h5, h6 {
     font-size: .7em;
 }
 
+div.score {
+    background: #f8f8e4;
+    padding: .5em;
+    box-shadow: 3px 3px 5px 2px rgba(100, 100, 100, 0.15);
+}
+
 .playerpoint {
     font-size: 3em;
     font-weight: bold;
 }
 
 .active {
-    color : red;
+    color: red;
 }
 
 .activeDiv {
-    border : 2px solid #00ffca;
+    border: 2px solid #4d8080;
 }
 
 .home img {

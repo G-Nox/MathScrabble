@@ -9,10 +9,6 @@ document.getElementById("15x15").onclick = function () {
     return resize(15)
 }
 
-// document.getElementById("submit").onclick = function () {
-//     document.getElementById("submit").attributes.add
-// }
-
 let handarr = document.getElementsByClassName("inHand")
 let cellarr = document.getElementsByClassName("myCell")
 let rowarr = document.getElementsByClassName("myRow")
@@ -62,7 +58,6 @@ function setCard() {
                 let url = "/scrabble/set/" + (activerow[1] - 1) + "/" + (i - 1) + "/" + activeCard
                 document.location.replace(url)
             }
-
         }
     } else {
         alert("No card was selected")
