@@ -1,50 +1,11 @@
-$("#3x3").click = function () {
-    return resize(3)
-}
-$("#9x9").onclick = function () {
-    return resize(9)
-}
-$("#15x15").onclick = function () {
-    return resize(15)
-}
-
-let handarr = $(".inHand")
-let cellarr = $(".myCell")
-let rowarr = $(".myRow")
-
-
-for (var i = 0; i < handarr.length; i++) {
-    let element = handarr[i]
-
-    element.onclick = function () {
-        return recolor(element, handarr)
-    }
-}
-
-for (var i = 0; i < cellarr.length; i++) {
-    let name = cellarr[i].className
-    let element = cellarr[i]
-    if (!name.includes("myLabel")) {
-        element.onclick = function () {
-            if (!element.classList.contains("activeDiv")) {
-                return recolor(element, cellarr)
-            } else {
-                return setCard()
-            }
-        }
-    }
-}
-
-
 function recolor(element, arr) {
-    for (var i = 0; i < arr.length; i++) {
-        arr[i].classList.remove("activeDiv")
-    }
+    arr.removeClass("activeDiv")
     element.classList.add("activeDiv")
 }
 
 function setCard() {
-    let active = isActive(handarr)
+    let rowarr = $(".myRow")
+    let active = isActive($(".inHand"))
     if (active[0]) {
         for (var i = 0; i < rowarr.length; i++) {
             let row = rowarr[i]
@@ -76,7 +37,25 @@ function isActive(array) {
 
 function resize(size) {
     document.location.replace("/scrabble/resize/" + size)
-    handarr = document.getElementsByClassName("inHand")
-    cellarr = document.getElementsByClassName("myCell")
-    rowarr = document.getElementsByClassName("myRow")
 }
+
+function initbtns() {
+    $("#3x3").click = function () {return resize(3)}
+    $("#9x9").click = function () {return resize(9)}
+    $("#15x15").click = function () {return resize(15)}
+    $("div.inHand").click(function (ev) {
+        return recolor(ev.currentTarget, $(".inHand"))
+    })
+    $(".myCell").not(".myLabel").click(function (ev) {
+        if (!ev.currentTarget.classList.contains("activeDiv")) {
+            return recolor(ev.currentTarget, $(".myCell"))
+        } else {
+            return setCard()
+        }
+    })
+}
+
+$( document ).ready(function() {
+    console.log( "Document is ready, filling grid" );
+    initbtns();
+});
