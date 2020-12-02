@@ -1,17 +1,16 @@
-document.getElementById("3x3").onclick = function () {
+$("#3x3").click = function () {
     return resize(3)
 }
-document.getElementById("9x9").onclick = function () {
+$("#9x9").onclick = function () {
     return resize(9)
 }
-
-document.getElementById("15x15").onclick = function () {
+$("#15x15").onclick = function () {
     return resize(15)
 }
 
-let handarr = document.getElementsByClassName("inHand")
-let cellarr = document.getElementsByClassName("myCell")
-let rowarr = document.getElementsByClassName("myRow")
+let handarr = $(".inHand")
+let cellarr = $(".myCell")
+let rowarr = $(".myRow")
 
 
 for (var i = 0; i < handarr.length; i++) {
@@ -20,7 +19,6 @@ for (var i = 0; i < handarr.length; i++) {
     element.onclick = function () {
         return recolor(element, handarr)
     }
-
 }
 
 for (var i = 0; i < cellarr.length; i++) {
@@ -74,7 +72,6 @@ function isActive(array) {
         }
     }
     return false
-
 }
 
 function resize(size) {
