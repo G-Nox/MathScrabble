@@ -4,48 +4,39 @@ function recolor(element, arr) {
 }
 
 function setCard() {
+    const isActive = (element) => element.classList.contains("activeDiv")
+
     let rowarr = $(".myRow")
-    let active = isActive($(".inHand"))
-    if (active[0]) {
+    let activeCard = $(".inHand").filter(isActive)
+
+    if (activeCard) {
         for (var i = 0; i < rowarr.length; i++) {
             let row = rowarr[i]
             let cells = row.getElementsByClassName("myCell")
-            activerow = isActive(cells)
-            if (activerow[0]) {
-                console.log([activerow[1],i])
-                let activeCard = active[1]
-                let url = "/scrabble/set/" + (activerow[1] - 1) + "/" + (i - 1) + "/" + activeCard
+            let activeCell = cells.findIndex(isActive)
+            if (activeCell >= 0) {
+                console.log([activeCell,i])
+                let url = "/scrabble/set/" + (activeCell - 1) + "/" + (i - 1) + "/" + activeCard
                 document.location.replace(url)
             }
         }
     } else {
         alert("No card was selected")
     }
-
-}
-
-
-function isActive(array) {
-    for (var i = 0; i < array.length; i++) {
-        let element = array[i]
-        if (element.classList.contains("activeDiv")) {
-            return [true, i]
-        }
-    }
-    return false
 }
 
 function resize(size) {
     document.location.replace("/scrabble/resize/" + size)
 }
 
-function updateGrid(grid, result){
+function updateGrid(result){
     let cells = $(".myCell").not(".myLabel")
     let index = 0
     let newcells = result.gameField.grid.cells
+    let size = newcells.length
 
-    for(var i = 0;i < grid.size;i++){
-        for(var j = 0;j < grid.size;j++){
+    for(var i = 0;i < size;i++){
+        for(var j = 0;j < size;j++){
             if(newcells[j][i].value !== "") {
                 let html = "<div class=\"myCharacter\">"+newcells[j][i].value+"</div>"
                     +"<div class=\"myPoint\">"+ point[newcells[j][i].value]+"</div>"
@@ -117,10 +108,7 @@ function loadJson() {
 
         success: function (result) {
             console.log(result)
-            grid_size = Object.keys(result.gameField.grid.cells).length
-            grid = new Grid(grid_size)
-            grid.fill(result.gameField.grid.cells)
-            updateGrid(grid, result)
+            updateGrid(result)
             updateHand(result)
             updateInfo(result)
         }
@@ -141,6 +129,56 @@ function initbtns() {
             return setCard()
         }
     })
+
+    $("#newGameBtn").click(function() {$.ajax( {
+        method: "GET",
+        url: "/scrabble/new",
+        success: function () {
+            loadJson()
+            newGrid()
+        }
+    })})
+
+    $("#switchBtn").click(function() {$.ajax( {
+        method: "GET",
+        url: "/json",
+        dataType: "json",
+
+        success: function (result) {
+            let player = result.status === "pB" ? "B" : "A"
+            $.ajax({
+                method: "GET",
+                url: "/scrabble/switch/" + player,
+                success: function (result) {
+                    loadJson()
+                }
+            })
+        }
+    })})
+
+    $("#submitBtn").click(function() {$.ajax( {
+        method: "GET",
+        url: "/scrabble/submit",
+        success: function () {
+            loadJson()
+        }
+    })})
+
+    $("#undoBtn").click(function() {$.ajax( {
+        method: "GET",
+        url: "/scrabble/undo",
+        success: function () {
+            loadJson()
+        }
+    })})
+
+    $("#redoBtn").click(function() {$.ajax( {
+        method: "GET",
+        url: "/scrabble/redo",
+        success: function () {
+            loadJson()
+        }
+    })})
 }
 
 $( document ).ready(function() {
