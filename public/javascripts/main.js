@@ -1,3 +1,21 @@
+const point = {
+    "=": 1,
+    "+": 1,
+    "-": 1,
+    "*": 2,
+    "/": 3,
+    "1": 1,
+    "2": 1,
+    "3": 2,
+    "4": 2,
+    "5": 3,
+    "6": 2,
+    "7": 4,
+    "8": 2,
+    "9": 2,
+    "0": 1
+}
+
 function recolor(element, arr) {
     arr.removeClass("activeDiv")
     element.classList.add("activeDiv")
@@ -25,10 +43,6 @@ function setCard() {
     }
 }
 
-function resize(size) {
-    document.location.replace("/scrabble/resize/" + size)
-}
-
 function updateGrid(result){
     let cells = $(".myCell").not(".myLabel")
     let index = 0
@@ -48,23 +62,47 @@ function updateGrid(result){
     }
 }
 
-function newGrid() {
-    let cells = $(".myCell").not(".myLabel")
-    let index = 0
-
-    for(var i = 0;i < grid.size;i++){
-        for(var j = 0;j < grid.size;j++){
-            cells[index].classList.remove("myCard")
-            if(cells[index].classList.contains("triple")) {
-                cells[index].innerHTML = "x3"
-            } else if (cells[index].classList.contains("double")) {
-                cells[index].innerHTML = "x2"
-            } else {
-                cells[index].innerHTML = ""
-            }
-            index ++
-        }
+function newGrid(result) {
+    let grid = result.gameField.grid.cells
+    let gridsize = result.gameField.grid.cells.length
+    let html = "<div class=\"myRow\"> <div class=\"myCell myLabel\"> </div>"
+    for(let i = 1;i < gridsize + 1;i++) {
+        html += "<div class=\"myCell myLabel\">"+i+"</div>"
     }
+    html += "</div>"
+    for(let col = 0;col < gridsize;col++) {
+        html+="<div class=\"myRow\">" +
+            "<div class=\"myCell myLabel\">"+(col+1)+"</div>"
+        for(let row =0;row < gridsize; row++) {
+            if(grid[row][col].value !== "") {
+                html+="<div class=\"myCard myCell\">" +
+                    "    <div class=\"myCharacter\">"+grid[row][col].value+"</div>" +
+                    "    <div class=\"myPoint\">"+point[grid[row][col].value]+"</div>" +
+                    "</div>"
+            } else {
+                if(grid[row][col].kind === "t") {
+                    html+="<div class=\"myCell triple\">x3</div>"
+                } else if(grid[row][col].kind === "d") {
+                    html+="<div class=\"myCell double\">x2</div>"
+                } else {
+                    html+="<div class=\"myCell normal\"> </div>"
+                }
+            }
+        }
+        html+="</div>"
+    }
+    $(".myGrid")[0].innerHTML = html
+    $("div.inHand").click(function (ev) {
+        return recolor(ev.currentTarget, $(".inHand"))
+    })
+
+    $(".myCell").not(".myLabel").click(function (ev) {
+        if (!ev.currentTarget.classList.contains("activeDiv")) {
+            return recolor(ev.currentTarget, $(".myCell"))
+        } else {
+            return setCard()
+        }
+    })
 }
 
 function updateHand(result) {
@@ -98,6 +136,27 @@ function updateInfo(result) {
         $("#scoreB").removeClass("active")
     }
     $("#stack")[0].innerText = result.gameField.pile.tilepile.length
+}
+
+function resize(size) {
+    $.ajax({
+        method: "GET",
+        url: "/scrabble/resize/" + size,
+
+        success: function () {
+            $.ajax({
+                method: "GET",
+                url: "/json",
+                dataType: "json",
+
+                success: function (result) {
+                    newGrid(result)
+                    loadJson()
+                }
+            })
+        }
+    })
+
 }
 
 function loadJson() {
@@ -134,8 +193,16 @@ function initbtns() {
         method: "GET",
         url: "/scrabble/new",
         success: function () {
-            loadJson()
-            newGrid()
+            $.ajax({
+                method: "GET",
+                url: "/json",
+                dataType: "json",
+
+                success: function (result) {
+                    newGrid(result)
+                    loadJson()
+                }
+            })
         }
     })})
 
@@ -168,7 +235,16 @@ function initbtns() {
         method: "GET",
         url: "/scrabble/undo",
         success: function () {
-            loadJson()
+            $.ajax({
+                method: "GET",
+                url: "/json",
+                dataType: "json",
+
+                success: function (result) {
+                    newGrid(result)
+                    loadJson()
+                }
+            })
         }
     })})
 
@@ -176,7 +252,16 @@ function initbtns() {
         method: "GET",
         url: "/scrabble/redo",
         success: function () {
-            loadJson()
+            $.ajax({
+                method: "GET",
+                url: "/json",
+                dataType: "json",
+
+                success: function (result) {
+                    newGrid(result)
+                    loadJson()
+                }
+            })
         }
     })})
 }
