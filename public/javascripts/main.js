@@ -1,8 +1,3 @@
-$("#resize").click(showbutton)
-
-let cellarr = $(".myCell")
-let rowarr = $(".myRow")
-
 const point = {
     "=": 1,
     "+": 1,
@@ -29,8 +24,8 @@ function recolor(element, arr) {
 function setCard() {
     let active = isActive($(".inHand"))
     if (active[0]) {
-        for (var i = 0; i < rowarr.length; i++) {
-            let row = rowarr[i]
+        for (var i = 0; i < $(".myRow").length; i++) {
+            let row = $(".myRow")[i]
             let cells = row.getElementsByClassName("myCell")
             let activerow = isActive(cells)
             if (activerow[0]) {
@@ -318,10 +313,9 @@ function initbtns() {
         return recolor(ev.currentTarget, $(".inHand"))
     })
 
-
     $(".myCell").not(".myLabel").click(function (ev) {
         if (!ev.currentTarget.classList.contains("activeDiv")) {
-            return recolor(ev.currentTarget, cellarr)
+            return recolor(ev.currentTarget, $(".myCell"))
         } else {
             return setCard()
         }
@@ -333,6 +327,7 @@ function connectWebSocket() {
     websocket.setTimeout = 1000
 
     websocket.onopen = function(event) {
+        console.log(event)
         console.log("Connected to Websocket");
     }
 
@@ -354,8 +349,7 @@ function connectWebSocket() {
             let grid = new Grid(grid_size)
             console.log(grid.cells)
             grid.fill(res.gameField.grid.cells)
-            updateGrid(grid)
-            loadHand()
+            updateGrid(grid, res)
         }
     };
 }
