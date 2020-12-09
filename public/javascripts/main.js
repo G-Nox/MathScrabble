@@ -1,3 +1,8 @@
+$("#resize").click(showbutton)
+
+let cellarr = $(".myCell")
+let rowarr = $(".myRow")
+
 const point = {
     "=": 1,
     "+": 1,
@@ -22,35 +27,80 @@ function recolor(element, arr) {
 }
 
 function setCard() {
-    const isActive = (element) => element.classList.contains("activeDiv")
-
-    let rowarr = $(".myRow")
-    let activeCard = $(".inHand").filter(isActive)
-
-    if (activeCard) {
+    let active = isActive($(".inHand"))
+    if (active[0]) {
         for (var i = 0; i < rowarr.length; i++) {
             let row = rowarr[i]
             let cells = row.getElementsByClassName("myCell")
-            let activeCell = cells.findIndex(isActive)
-            if (activeCell >= 0) {
-                console.log([activeCell,i])
-                let url = "/scrabble/set/" + (activeCell - 1) + "/" + (i - 1) + "/" + activeCard
-                document.location.replace(url)
+            let activerow = isActive(cells)
+            if (activerow[0]) {
+                let activeCard = active[1]
+                let url = "/scrabble/set/" + (activerow[1] - 1) + "/" + (i - 1) + "/" + activeCard
+                $.ajax({
+                    method: "GET",
+                    url: url,
+                    success: function () {
+                        loadJson()
+                    }
+                });
             }
         }
     } else {
         alert("No card was selected")
     }
+
 }
 
-function updateGrid(result){
+
+function isActive(array) {
+    for (var i = 0; i < array.length; i++) {
+        let element = array[i]
+        if (element.classList.contains("activeDiv")) {
+            return [true, i]
+        }
+    }
+    return false
+
+}
+
+function showbutton() {
+    let buttons = document.getElementsByClassName("possibleSize")
+    if (buttons[0].classList.contains("d-none")) {
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove("d-none")
+        }
+    } else {
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.add("d-none")
+        }
+    }
+}
+
+class Grid {
+    constructor(size) {
+        this.size = size
+        this.cells = []
+    }
+
+    fill(json){
+        for(let i = 0; i < this.size;i++){
+            let arr = json[i]
+            let data = []
+            for(let j = 0;j < arr.length;j++) {
+                data[j] = [arr[j].value, arr[j].kind]
+            }
+            this.cells[i] = data
+        }
+    }
+}
+
+function updateGrid(grid, result){
     let cells = $(".myCell").not(".myLabel")
     let index = 0
     let newcells = result.gameField.grid.cells
-    let size = newcells.length
 
-    for(var i = 0;i < size;i++){
-        for(var j = 0;j < size;j++){
+    for(var i = 0;i < grid.size;i++){
+        for(var j = 0;j < grid.size;j++){
             if(newcells[j][i].value !== "") {
                 let html = "<div class=\"myCharacter\">"+newcells[j][i].value+"</div>"
                     +"<div class=\"myPoint\">"+ point[newcells[j][i].value]+"</div>"
@@ -167,7 +217,10 @@ function loadJson() {
 
         success: function (result) {
             console.log(result)
-            updateGrid(result)
+            grid_size = Object.keys(result.gameField.grid.cells).length
+            grid = new Grid(grid_size)
+            grid.fill(result.gameField.grid.cells)
+            updateGrid(grid, result)
             updateHand(result)
             updateInfo(result)
         }
@@ -175,20 +228,6 @@ function loadJson() {
 }
 
 function initbtns() {
-    $("#3x3").click = function () {return resize(3)}
-    $("#9x9").click = function () {return resize(9)}
-    $("#15x15").click = function () {return resize(15)}
-    $("div.inHand").click(function (ev) {
-        return recolor(ev.currentTarget, $(".inHand"))
-    })
-    $(".myCell").not(".myLabel").click(function (ev) {
-        if (!ev.currentTarget.classList.contains("activeDiv")) {
-            return recolor(ev.currentTarget, $(".myCell"))
-        } else {
-            return setCard()
-        }
-    })
-
     $("#newGameBtn").click(function() {$.ajax( {
         method: "GET",
         url: "/scrabble/new",
@@ -264,9 +303,65 @@ function initbtns() {
             })
         }
     })})
+    $("#3x3").click(function () {
+        return resize(3)
+    })
+    $("#9x9").click(function () {
+        return resize(9)
+    })
+
+    $("#15x15").click(function () {
+        return resize(15)
+    })
+
+    $("div.inHand").click(function (ev) {
+        return recolor(ev.currentTarget, $(".inHand"))
+    })
+
+
+    $(".myCell").not(".myLabel").click(function (ev) {
+        if (!ev.currentTarget.classList.contains("activeDiv")) {
+            return recolor(ev.currentTarget, cellarr)
+        } else {
+            return setCard()
+        }
+    })
+}
+
+function connectWebSocket() {
+    var websocket = new WebSocket("ws://localhost:9000/websocket");
+    websocket.setTimeout = 1000
+
+    websocket.onopen = function(event) {
+        console.log("Connected to Websocket");
+    }
+
+    websocket.onclose = function (code) {
+        console.log(code)
+        console.log('Connection with Websocket Closed!');
+    };
+
+    websocket.onerror = function (error) {
+        console.log('Error in Websocket Occured: ' + error);
+    };
+
+    websocket.onmessage = function (e) {
+        if (typeof e.data === "string") {
+            console.log("websockets geht")
+            let res = JSON.parse(e.data)
+            console.log(res)
+            let grid_size = Object.keys(res.gameField.grid.cells).length
+            let grid = new Grid(grid_size)
+            console.log(grid.cells)
+            grid.fill(res.gameField.grid.cells)
+            updateGrid(grid)
+            loadHand()
+        }
+    };
 }
 
 $( document ).ready(function() {
     console.log( "Document is ready, filling grid" );
-    initbtns();
+    initbtns()
+    connectWebSocket()
 });
