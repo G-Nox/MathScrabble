@@ -1,6 +1,7 @@
 package controllers
 
 import de.htwg.se.scrabble.Scrabble
+
 import javax.inject._
 import play.api._
 import play.api.mvc._
@@ -8,10 +9,8 @@ import play.api.libs.streams.ActorFlow
 import akka.actor.ActorSystem
 import akka.stream.Materializer
 import akka.actor._
-import de.htwg.se.scrabble.controller.controllerComponent.GridSizeChanged
-import de.htwg.se.scrabble.controller.controllerComponent.InvalidEquation
-import de.htwg.se.scrabble.controller.controllerComponent.GameFieldChanged
-import de.htwg.se.scrabble.controller.controllerComponent.CardsChanged
+import de.htwg.se.scrabble.controller.controllerComponent.{CardsChanged, ControllerInterface, GameFieldChanged, GridSizeChanged, InvalidEquation}
+import play.api.libs.json.Json
 
 import scala.swing.Reactor
 
@@ -22,9 +21,10 @@ import scala.swing.Reactor
 @Singleton
 class HomeController @Inject()(cc: ControllerComponents)(implicit system: ActorSystem, mat: Materializer) extends AbstractController(cc) {
 
-  val gamecontroller = Scrabble.controller
+  val gamecontroller: ControllerInterface = Scrabble.controller
+  var players: List[String] = List()
 
-  def text = gamecontroller.gameToString
+  def text: String = gamecontroller.gameToString
 
   /**
    * Create an Action to render an HTML page.
@@ -97,23 +97,43 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit system: ActorS
     listenTo(gamecontroller)
 
     def receive = {
+      case "PlayerNameRequest" =>
+        players.length match {
+          case 0 => players = "A" :: players
+            out ! Json.obj("Event" -> "PlayerName", "Name" -> "A").toString()
+          case 1 =>
+            if (players.contains("A")) {
+              players = "B" :: players
+              out ! Json.obj("Event" -> "PlayerName", "Name" -> "B").toString()
+            } else {
+              players = "A" :: players
+              out ! Json.obj("Event" -> "PlayerName", "Name" -> "A").toString()
+            }
+          case _ => out ! Json.obj("Event" -> "PlayerFull").toString()
+        }
+      case "disconnected player A" =>
+        players = players.filter(_ != "A")
+        println("player A disconnected")
+      case "disconnected player B" => players =
+        players.filter(_ != "B")
+        println("player B disconnected")
       case msg: String =>
-        out ! (gamecontroller.memToJson(gamecontroller.createMemento()).toString())
+        out ! gamecontroller.memToJson(gamecontroller.createMemento()).toString()
         println("Sent Json to Client" + msg)
     }
 
     reactions += {
-      case event: GameFieldChanged => sendJsonToClient
-      case event: CardsChanged => sendJsonToClient
-      case event: InvalidEquation => sendJsonToClient
+      case event: GameFieldChanged => sendJsonToClient(event)
+      case event: GridSizeChanged => sendJsonToClient(event)
+      case event: CardsChanged => sendJsonToClient(event)
+      case event: InvalidEquation => sendJsonToClient(event)
     }
 
-    def sendJsonToClient = {
+    def sendJsonToClient(event: scala.swing.event.Event) = {
       println("Received event from Controller")
-      out ! (gamecontroller.memToJson(gamecontroller.createMemento()).toString())
+      out ! (gamecontroller.memToJson(gamecontroller.createMemento(),event).toString())
     }
   }
-
 
 }
 

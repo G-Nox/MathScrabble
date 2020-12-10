@@ -16,6 +16,8 @@ const point = {
     "0": 1
 }
 
+let client_player = ""
+
 function recolor(element, arr) {
     arr.removeClass("activeDiv")
     element.classList.add("activeDiv")
@@ -43,9 +45,7 @@ function setCard() {
     } else {
         alert("No card was selected")
     }
-
 }
-
 
 function isActive(array) {
     for (var i = 0; i < array.length; i++) {
@@ -55,20 +55,6 @@ function isActive(array) {
         }
     }
     return false
-
-}
-
-function showbutton() {
-    let buttons = document.getElementsByClassName("possibleSize")
-    if (buttons[0].classList.contains("d-none")) {
-        for (var i = 0; i < buttons.length; i++) {
-            buttons[i].classList.remove("d-none")
-        }
-    } else {
-        for (var i = 0; i < buttons.length; i++) {
-            buttons[i].classList.add("d-none")
-        }
-    }
 }
 
 class Grid {
@@ -89,25 +75,26 @@ class Grid {
     }
 }
 
-function updateGrid(grid, result){
-    let cells = $(".myCell").not(".myLabel")
-    let index = 0
-    let newcells = result.gameField.grid.cells
+// function updateGrid(result){
+//     let cells = $(".myCell").not(".myLabel")
+//     let index = 0
+//     let newcells = result.gameField.grid.cells
+//     console.log(newcells)
+//
+//     for(var i = 0;i < newcells.length;i++){
+//         for(var j = 0;j < newcells.length;j++){
+//             if(newcells[j][i].value !== "") {
+//                 let html = "<div class=\"myCharacter\">"+newcells[j][i].value+"</div>"
+//                     +"<div class=\"myPoint\">"+ point[newcells[j][i].value]+"</div>"
+//                 cells[index].classList.add("myCard")
+//                 cells[index].innerHTML = html
+//             }
+//             index ++
+//         }
+//     }
+// }
 
-    for(var i = 0;i < grid.size;i++){
-        for(var j = 0;j < grid.size;j++){
-            if(newcells[j][i].value !== "") {
-                let html = "<div class=\"myCharacter\">"+newcells[j][i].value+"</div>"
-                    +"<div class=\"myPoint\">"+ point[newcells[j][i].value]+"</div>"
-                cells[index].classList.add("myCard")
-                cells[index].innerHTML = html
-            }
-            index ++
-        }
-    }
-}
-
-function newGrid(result) {
+function updateGrid(result) {
     let grid = result.gameField.grid.cells
     let gridsize = result.gameField.grid.cells.length
     let html = "<div class=\"myRow\"> <div class=\"myCell myLabel\"> </div>"
@@ -212,10 +199,10 @@ function loadJson() {
 
         success: function (result) {
             console.log(result)
-            grid_size = Object.keys(result.gameField.grid.cells).length
-            grid = new Grid(grid_size)
-            grid.fill(result.gameField.grid.cells)
-            updateGrid(grid, result)
+            // grid_size = Object.keys(result.gameField.grid.cells).length
+            // grid = new Grid(grid_size)
+            // grid.fill(result.gameField.grid.cells)
+            updateGrid(result)
             updateHand(result)
             updateInfo(result)
         }
@@ -223,6 +210,11 @@ function loadJson() {
 }
 
 function initbtns() {
+    let isCurrentPlayer = function(result) {
+        let player = result.status === "pB" ? "B" : "A"
+        return player === client_player
+    }
+
     $("#newGameBtn").click(function() {$.ajax( {
         method: "GET",
         url: "/scrabble/new",
@@ -244,24 +236,37 @@ function initbtns() {
         method: "GET",
         url: "/json",
         dataType: "json",
-
         success: function (result) {
-            let player = result.status === "pB" ? "B" : "A"
-            $.ajax({
-                method: "GET",
-                url: "/scrabble/switch/" + player,
-                success: function (result) {
-                    loadJson()
-                }
-            })
+            if(isCurrentPlayer(result)) {
+                $.ajax({
+                    method: "GET",
+                    url: "/scrabble/switch/" + client_player,
+                    success: function () {
+                        loadJson()
+                    }
+                })
+            } else {
+                alert("not your turn")
+            }
         }
     })})
 
     $("#submitBtn").click(function() {$.ajax( {
         method: "GET",
-        url: "/scrabble/submit",
-        success: function () {
-            loadJson()
+        url: "/json",
+        dataType: "json",
+        success: function (result) {
+            if(isCurrentPlayer(result)) {
+                $.ajax({
+                    method: "GET",
+                    url: "/scrabble/submit",
+                    success: function () {
+                        loadJson()
+                    }
+                })
+            } else {
+                alert("not your turn")
+            }
         }
     })})
 
@@ -298,37 +303,49 @@ function initbtns() {
             })
         }
     })})
-    $("#3x3").click(function () {
-        return resize(3)
-    })
-    $("#9x9").click(function () {
-        return resize(9)
-    })
+    $("#3x3").click(function () {return resize(3)})
+    $("#9x9").click(function () {return resize(9)})
+    $("#15x15").click(function () {return resize(15)})
 
-    $("#15x15").click(function () {
-        return resize(15)
-    })
-
-    $("div.inHand").click(function (ev) {
-        return recolor(ev.currentTarget, $(".inHand"))
-    })
+    $("div.inHand").click(function (ev) {$.ajax( {
+        method: "GET",
+        url: "/json",
+        dataType: "json",
+        success: function (result) {
+            if(isCurrentPlayer(result)) {
+                return recolor(ev.currentTarget, $(".inHand"))
+            } else {
+                alert("not your turn")
+            }
+        }
+    })})
 
     $(".myCell").not(".myLabel").click(function (ev) {
-        if (!ev.currentTarget.classList.contains("activeDiv")) {
-            return recolor(ev.currentTarget, $(".myCell"))
-        } else {
-            return setCard()
-        }
-    })
+        $.ajax( {
+            method: "GET",
+            url: "/json",
+            dataType: "json",
+            success: function (result) {
+                if(isCurrentPlayer(result)) {
+                    if (!ev.currentTarget.classList.contains("activeDiv")) {
+                        return recolor(ev.currentTarget, $(".myCell"))
+                    } else {
+                        return setCard()
+                    }
+                } else {
+                    alert("not your turn")
+                }
+            }
+        })})
 }
 
 function connectWebSocket() {
     var websocket = new WebSocket("ws://localhost:9000/websocket");
-    websocket.setTimeout = 1000
 
     websocket.onopen = function(event) {
         console.log(event)
-        console.log("Connected to Websocket");
+        console.log("Connected to Websocket")
+        websocket.send("PlayerNameRequest")
     }
 
     websocket.onclose = function (code) {
@@ -342,16 +359,30 @@ function connectWebSocket() {
 
     websocket.onmessage = function (e) {
         if (typeof e.data === "string") {
-            console.log("websockets geht")
+            // console.log(e)
             let res = JSON.parse(e.data)
-            console.log(res)
-            let grid_size = Object.keys(res.gameField.grid.cells).length
-            let grid = new Grid(grid_size)
-            console.log(grid.cells)
-            grid.fill(res.gameField.grid.cells)
-            updateGrid(grid, res)
+            switch(res.Event) {
+                case "InvalidEquation()":
+                    alert("invalid equation")
+                    loadJson()
+                    break
+                case "GridSizeChanged()":
+                    newGrid(res)
+                    loadJson()
+                    break
+                case "PlayerName":
+                    client_player = res.Name
+                    console.log("player: "+client_player)
+                    break
+                default:
+                    loadJson()
+            }
         }
     };
+
+    window.onbeforeunload = function (){
+        websocket.send("disconnected player " + client_player)
+    }
 }
 
 $( document ).ready(function() {
