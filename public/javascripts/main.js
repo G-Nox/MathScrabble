@@ -16,7 +16,7 @@ const point = {
     "0": 1
 }
 
-let client_player = ""
+var client_player = ""
 
 function recolor(element, arr) {
     arr.removeClass("activeDiv")
