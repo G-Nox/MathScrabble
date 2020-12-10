@@ -182,7 +182,7 @@ function resize(size) {
                 dataType: "json",
 
                 success: function (result) {
-                    newGrid(result)
+                    updateGrid(result)
                     loadJson()
                 }
             })
@@ -225,7 +225,7 @@ function initbtns() {
                 dataType: "json",
 
                 success: function (result) {
-                    newGrid(result)
+                    updateGrid(result)
                     loadJson()
                 }
             })
@@ -237,17 +237,19 @@ function initbtns() {
         url: "/json",
         dataType: "json",
         success: function (result) {
-            if(isCurrentPlayer(result)) {
+            let currentPlayer = result.status==="pB"?"B":"A"
+           // if(isCurrentPlayer(result)) {
                 $.ajax({
                     method: "GET",
-                    url: "/scrabble/switch/" + client_player,
+                    url: "/scrabble/switch/" + currentPlayer,
                     success: function () {
                         loadJson()
                     }
+
                 })
-            } else {
-                alert("not your turn")
-            }
+            //} else {
+            //    alert("not your turn")
+           // }
         }
     })})
 
@@ -256,7 +258,7 @@ function initbtns() {
         url: "/json",
         dataType: "json",
         success: function (result) {
-            if(isCurrentPlayer(result)) {
+            if(!isCurrentPlayer(result)) {
                 $.ajax({
                     method: "GET",
                     url: "/scrabble/submit",
@@ -280,7 +282,7 @@ function initbtns() {
                 dataType: "json",
 
                 success: function (result) {
-                    newGrid(result)
+                    updateGrid(result)
                     loadJson()
                 }
             })
@@ -297,7 +299,7 @@ function initbtns() {
                 dataType: "json",
 
                 success: function (result) {
-                    newGrid(result)
+                    updateGrid(result)
                     loadJson()
                 }
             })
@@ -367,7 +369,7 @@ function connectWebSocket() {
                     loadJson()
                     break
                 case "GridSizeChanged()":
-                    newGrid(res)
+                    updateGrid(res)
                     loadJson()
                     break
                 case "PlayerName":
