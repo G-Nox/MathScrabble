@@ -75,67 +75,48 @@ class Grid {
     }
 }
 
-// function updateGrid(result){
-//     let cells = $(".myCell").not(".myLabel")
-//     let index = 0
-//     let newcells = result.gameField.grid.cells
-//     console.log(newcells)
-//
-//     for(var i = 0;i < newcells.length;i++){
-//         for(var j = 0;j < newcells.length;j++){
-//             if(newcells[j][i].value !== "") {
-//                 let html = "<div class=\"myCharacter\">"+newcells[j][i].value+"</div>"
-//                     +"<div class=\"myPoint\">"+ point[newcells[j][i].value]+"</div>"
-//                 cells[index].classList.add("myCard")
-//                 cells[index].innerHTML = html
-//             }
-//             index ++
-//         }
+// function updateGrid(result) {
+//     let grid = result.gameField.grid.cells
+//     let gridsize = result.gameField.grid.cells.length
+//     let html = "<div class=\"myRow\"> <div class=\"myCell myLabel\"> </div>"
+//     for(let i = 1;i < gridsize + 1;i++) {
+//         html += "<div class=\"myCell myLabel\">"+i+"</div>"
 //     }
+//     html += "</div>"
+//     for(let col = 0;col < gridsize;col++) {
+//         html+="<div class=\"myRow\">" +
+//             "<div class=\"myCell myLabel\">"+(col+1)+"</div>"
+//         for(let row =0;row < gridsize; row++) {
+//             if(grid[row][col].value !== "") {
+//                 html+="<div class=\"myCard myCell\">" +
+//                     "    <div class=\"myCharacter\">"+grid[row][col].value+"</div>" +
+//                     "    <div class=\"myPoint\">"+point[grid[row][col].value]+"</div>" +
+//                     "</div>"
+//             } else {
+//                 if(grid[row][col].kind === "t") {
+//                     html+="<div class=\"myCell triple\">x3</div>"
+//                 } else if(grid[row][col].kind === "d") {
+//                     html+="<div class=\"myCell double\">x2</div>"
+//                 } else {
+//                     html+="<div class=\"myCell normal\"> </div>"
+//                 }
+//             }
+//         }
+//         html+="</div>"
+//     }
+//     $(".myGrid")[0].innerHTML = html
+//     $("div.inHand").click(function (ev) {
+//         return recolor(ev.currentTarget, $(".inHand"))
+//     })
+//
+//     $(".myCell").not(".myLabel").click(function (ev) {
+//         if (!ev.currentTarget.classList.contains("activeDiv")) {
+//             return recolor(ev.currentTarget, $(".myCell"))
+//         } else {
+//             return setCard()
+//         }
+//     })
 // }
-
-function updateGrid(result) {
-    let grid = result.gameField.grid.cells
-    let gridsize = result.gameField.grid.cells.length
-    let html = "<div class=\"myRow\"> <div class=\"myCell myLabel\"> </div>"
-    for(let i = 1;i < gridsize + 1;i++) {
-        html += "<div class=\"myCell myLabel\">"+i+"</div>"
-    }
-    html += "</div>"
-    for(let col = 0;col < gridsize;col++) {
-        html+="<div class=\"myRow\">" +
-            "<div class=\"myCell myLabel\">"+(col+1)+"</div>"
-        for(let row =0;row < gridsize; row++) {
-            if(grid[row][col].value !== "") {
-                html+="<div class=\"myCard myCell\">" +
-                    "    <div class=\"myCharacter\">"+grid[row][col].value+"</div>" +
-                    "    <div class=\"myPoint\">"+point[grid[row][col].value]+"</div>" +
-                    "</div>"
-            } else {
-                if(grid[row][col].kind === "t") {
-                    html+="<div class=\"myCell triple\">x3</div>"
-                } else if(grid[row][col].kind === "d") {
-                    html+="<div class=\"myCell double\">x2</div>"
-                } else {
-                    html+="<div class=\"myCell normal\"> </div>"
-                }
-            }
-        }
-        html+="</div>"
-    }
-    $(".myGrid")[0].innerHTML = html
-    $("div.inHand").click(function (ev) {
-        return recolor(ev.currentTarget, $(".inHand"))
-    })
-
-    $(".myCell").not(".myLabel").click(function (ev) {
-        if (!ev.currentTarget.classList.contains("activeDiv")) {
-            return recolor(ev.currentTarget, $(".myCell"))
-        } else {
-            return setCard()
-        }
-    })
-}
 
 function updateHand(result) {
     let html2 = ""
