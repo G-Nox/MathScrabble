@@ -13,6 +13,23 @@ const store = {
             B: 0,
         },
         num_pile: 0,
+        card_point: {
+            "=": 1,
+            "+": 1,
+            "-": 1,
+            "*": 2,
+            "/": 3,
+            "1": 1,
+            "2": 1,
+            "3": 2,
+            "4": 2,
+            "5": 3,
+            "6": 2,
+            "7": 4,
+            "8": 2,
+            "9": 2,
+            "0": 1
+        }
     },
     setGrid(size, cells) {
         this.state.size = size
@@ -21,25 +38,21 @@ const store = {
     setPlayer(player) {
         this.state.player = player
     },
-    setHand(player, hand) {
-        if(player === "A") {
-            this.state.hand.A = hand
-        } else if (player === "B") {
-            this.state.hand.B = hand
-        }
-    },
-    setPoint(player, point) {
-        if(player === "A") {
-            this.state.point.A = point
-        } else if (player === "B") {
-            this.state.point.B = point
-        }
+    setHandAndPoint(playerA, playerB) {
+        this.state.hand.A = playerA.hand
+        this.state.hand.B = playerB.hand
+        this.state.point.A = playerA.point
+        this.state.point.B = playerB.point
     },
     setPile(pile){
         this.state.num_pile = pile
     },
     setTurn(turn) {
-        this.state.turn = turn
+        if (turn !== "pB") {
+            this.state.turn = "A"
+        } else {
+            this.state.turn = "B"
+        }
     }
 }
 
@@ -49,7 +62,7 @@ function connectWebSocket() {
     websocket.onopen = function(event) {
         console.log(event)
         console.log("Connected to Websocket")
-        websocket.send("a")
+        websocket.send("")
     }
 
     websocket.onclose = function (code) {
@@ -68,19 +81,17 @@ function connectWebSocket() {
             switch(res.Event) {
                 case "InvalidEquation()":
                     alert("invalid equation")
-                    loadJson()
+                    store.setGrid(res.gameField.grid.cells.length, res.gameField.grid.cells)
                     break
                 case "GridSizeChanged()":
-                    updateGrid(res)
-                    loadJson()
-                    break
-                case "PlayerName":
-                    client_player = res.Name
-                    console.log("player: "+client_player)
+                    store.setGrid(res.gameField.grid.cells.length, res.gameField.grid.cells)
+                    store.setPile(res.gameField.pile.length)
                     break
                 default:
-                    loadJson()
                     store.setGrid(res.gameField.grid.cells.length, res.gameField.grid.cells)
+                    store.setPile(res.gameField.pile.length)
+                    store.setHandAndPoint(res.gameField.playerList.A, res.gameField.playerList.B)
+                    store.setTurn(res.status)
                     console.log(store.state.cells)
 
             }

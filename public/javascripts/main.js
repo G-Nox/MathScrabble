@@ -1,23 +1,3 @@
-const point = {
-    "=": 1,
-    "+": 1,
-    "-": 1,
-    "*": 2,
-    "/": 3,
-    "1": 1,
-    "2": 1,
-    "3": 2,
-    "4": 2,
-    "5": 3,
-    "6": 2,
-    "7": 4,
-    "8": 2,
-    "9": 2,
-    "0": 1
-}
-
-var client_player = ""
-
 function recolor(element, arr) {
     arr.removeClass("activeDiv")
     element.classList.add("activeDiv")
@@ -32,7 +12,7 @@ function setCard() {
             let activerow = isActive(cells)
             if (activerow[0]) {
                 let activeCard = active[1]
-                let url = "/scrabble/set/" + (activerow[1] - 1) + "/" + (i - 1) + "/" + activeCard
+                let url = "/scrabble/set/" + (i - 1) + "/" + (activerow[1] - 1) + "/" + activeCard
                 $.ajax({
                     method: "GET",
                     url: url,
@@ -75,69 +55,6 @@ class Grid {
     }
 }
 
-// function updateGrid(result) {
-//     let grid = result.gameField.grid.cells
-//     let gridsize = result.gameField.grid.cells.length
-//     let html = "<div class=\"myRow\"> <div class=\"myCell myLabel\"> </div>"
-//     for(let i = 1;i < gridsize + 1;i++) {
-//         html += "<div class=\"myCell myLabel\">"+i+"</div>"
-//     }
-//     html += "</div>"
-//     for(let col = 0;col < gridsize;col++) {
-//         html+="<div class=\"myRow\">" +
-//             "<div class=\"myCell myLabel\">"+(col+1)+"</div>"
-//         for(let row =0;row < gridsize; row++) {
-//             if(grid[row][col].value !== "") {
-//                 html+="<div class=\"myCard myCell\">" +
-//                     "    <div class=\"myCharacter\">"+grid[row][col].value+"</div>" +
-//                     "    <div class=\"myPoint\">"+point[grid[row][col].value]+"</div>" +
-//                     "</div>"
-//             } else {
-//                 if(grid[row][col].kind === "t") {
-//                     html+="<div class=\"myCell triple\">x3</div>"
-//                 } else if(grid[row][col].kind === "d") {
-//                     html+="<div class=\"myCell double\">x2</div>"
-//                 } else {
-//                     html+="<div class=\"myCell normal\"> </div>"
-//                 }
-//             }
-//         }
-//         html+="</div>"
-//     }
-//     $(".myGrid")[0].innerHTML = html
-//     $("div.inHand").click(function (ev) {
-//         return recolor(ev.currentTarget, $(".inHand"))
-//     })
-//
-//     $(".myCell").not(".myLabel").click(function (ev) {
-//         if (!ev.currentTarget.classList.contains("activeDiv")) {
-//             return recolor(ev.currentTarget, $(".myCell"))
-//         } else {
-//             return setCard()
-//         }
-//     })
-// }
-
-function updateHand(result) {
-    let html2 = ""
-    let newhand
-    if (result.status === "pA" || result.status === "fc") {
-        newhand = result.gameField.playerList.A.hand
-    } else {
-        newhand = result.gameField.playerList.B.hand
-    }
-
-    for (var j = 0;j < newhand.length;j++){
-        html2 += "<div class=\"myCard inHand\"> <div class=\"myCharacter\">"+newhand[j].value+"</div>"
-            +"<div class=\"myPoint\">"+ point[newhand[j].value]+"</div></div>"
-    }
-    $(".myHand")[0].innerHTML = html2
-
-    $("div.inHand").click(function (ev) {
-        return recolor(ev.currentTarget, $(".inHand"))
-    })
-}
-
 function updateInfo(result) {
     $("#scoreA .playerpoint")[0].innerHTML = result.gameField.playerList.A.point
     $("#scoreB .playerpoint")[0].innerHTML = result.gameField.playerList.B.point
@@ -163,7 +80,7 @@ function resize(size) {
                 dataType: "json",
 
                 success: function (result) {
-                    updateGrid(result)
+                    //updateGrid(result)
                     loadJson()
                 }
             })
@@ -183,8 +100,8 @@ function loadJson() {
             // grid_size = Object.keys(result.gameField.grid.cells).length
             // grid = new Grid(grid_size)
             // grid.fill(result.gameField.grid.cells)
-            updateGrid(result)
-            updateHand(result)
+            // updateGrid(result)
+            // updateHand(result)
             updateInfo(result)
         }
     });
@@ -206,7 +123,7 @@ function initbtns() {
                 dataType: "json",
 
                 success: function (result) {
-                    updateGrid(result)
+                    // updateGrid(result)
                     loadJson()
                 }
             })
@@ -263,7 +180,7 @@ function initbtns() {
                 dataType: "json",
 
                 success: function (result) {
-                    updateGrid(result)
+                    // updateGrid(result)
                     loadJson()
                 }
             })
@@ -280,7 +197,7 @@ function initbtns() {
                 dataType: "json",
 
                 success: function (result) {
-                    updateGrid(result)
+                    // updateGrid(result)
                     loadJson()
                 }
             })
@@ -322,54 +239,7 @@ function initbtns() {
         })})
 }
 
-function connectWebSocket() {
-    var websocket = new WebSocket("ws://localhost:9000/websocket");
-
-    websocket.onopen = function(event) {
-        console.log(event)
-        console.log("Connected to Websocket")
-        websocket.send("PlayerNameRequest")
-    }
-
-    websocket.onclose = function (code) {
-        console.log(code)
-        console.log('Connection with Websocket Closed!');
-    };
-
-    websocket.onerror = function (error) {
-        console.log('Error in Websocket Occured: ' + error);
-    };
-
-    websocket.onmessage = function (e) {
-        if (typeof e.data === "string") {
-            // console.log(e)
-            let res = JSON.parse(e.data)
-            switch(res.Event) {
-                case "InvalidEquation()":
-                    alert("invalid equation")
-                    loadJson()
-                    break
-                case "GridSizeChanged()":
-                    updateGrid(res)
-                    loadJson()
-                    break
-                case "PlayerName":
-                    client_player = res.Name
-                    console.log("player: "+client_player)
-                    break
-                default:
-                    loadJson()
-            }
-        }
-    };
-
-    window.onbeforeunload = function (){
-        websocket.send("disconnected player " + client_player)
-    }
-}
-
 $( document ).ready(function() {
     console.log( "Document is ready, filling grid" );
     initbtns()
-    connectWebSocket()
 });

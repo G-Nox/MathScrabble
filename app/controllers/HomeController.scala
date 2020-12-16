@@ -97,26 +97,6 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit system: ActorS
     listenTo(gamecontroller)
 
     def receive = {
-      case "PlayerNameRequest" =>
-        players.length match {
-          case 0 => players = "A" :: players
-            out ! Json.obj("Event" -> "PlayerName", "Name" -> "A").toString()
-          case 1 =>
-            if (players.contains("A")) {
-              players = "B" :: players
-              out ! Json.obj("Event" -> "PlayerName", "Name" -> "B").toString()
-            } else {
-              players = "A" :: players
-              out ! Json.obj("Event" -> "PlayerName", "Name" -> "A").toString()
-            }
-          case _ => out ! Json.obj("Event" -> "PlayerFull").toString()
-        }
-      case "disconnected player A" =>
-        players = players.filter(_ != "A")
-        println("player A disconnected")
-      case "disconnected player B" => players =
-        players.filter(_ != "B")
-        println("player B disconnected")
       case msg: String =>
         out ! gamecontroller.memToJson(gamecontroller.createMemento()).toString()
         println("Sent Json to Client" + msg)
