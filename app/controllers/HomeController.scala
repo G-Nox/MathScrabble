@@ -38,42 +38,42 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit system: ActorS
   }
 
   def scrabble() = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.scrabble(gamecontroller))
+    Ok(views.html.scrabble())
   }
 
   def newGrid() = Action { implicit request: Request[AnyContent] =>
     gamecontroller.init
-    Ok(views.html.scrabble(gamecontroller))
+    Ok(views.html.scrabble())
   }
 
   def submit() = Action { implicit request: Request[AnyContent] =>
     gamecontroller.endTurn
-    Ok(views.html.scrabble(gamecontroller))
+    Ok(views.html.scrabble())
   }
 
   def setCard(x: Int, y: Int, count: Int) = Action { implicit request: Request[AnyContent] =>
     gamecontroller.setGrid(x, y, count)
-    Ok(views.html.scrabble(gamecontroller))
+    Ok(views.html.scrabble())
   }
 
   def switchCards(currPlayer: String) = Action { implicit request: Request[AnyContent] =>
     gamecontroller.changeHand(currPlayer)
-    Ok(views.html.scrabble(gamecontroller))
+    Ok(views.html.scrabble())
   }
 
   def undo() = Action { implicit request: Request[AnyContent] =>
     gamecontroller.undo
-    Ok(views.html.scrabble(gamecontroller))
+    Ok(views.html.scrabble())
   }
 
   def redo() = Action { implicit request: Request[AnyContent] =>
     gamecontroller.redo
-    Ok(views.html.scrabble(gamecontroller))
+    Ok(views.html.scrabble())
   }
 
   def resize(size: Int) = Action { implicit request: Request[AnyContent] =>
     gamecontroller.createFixedSizeGameField(size)
-    Ok(views.html.scrabble(gamecontroller))
+    Ok(views.html.scrabble())
   }
 
   def gridToJson = Action {

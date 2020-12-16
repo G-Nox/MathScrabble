@@ -12,7 +12,7 @@ const store = {
             A: 0,
             B: 0,
         },
-        num_pile: 0,
+        pile: 10,
         card_point: {
             "=": 1,
             "+": 1,
@@ -45,7 +45,7 @@ const store = {
         this.state.point.B = playerB.point
     },
     setPile(pile){
-        this.state.num_pile = pile
+        this.state.pile = pile.tilepile.length
     },
     setTurn(turn) {
         if (turn !== "pB") {
@@ -76,31 +76,30 @@ function connectWebSocket() {
 
     websocket.onmessage = function (e) {
         if (typeof e.data === "string") {
-            // console.log(e)
             let res = JSON.parse(e.data)
+            console.log(res)
             switch(res.Event) {
                 case "InvalidEquation()":
                     alert("invalid equation")
                     store.setGrid(res.gameField.grid.cells.length, res.gameField.grid.cells)
+                    store.setPile(res.gameField.pile)
+                    store.setHandAndPoint(res.gameField.playerList.A, res.gameField.playerList.B)
+                    store.setTurn(res.status)
                     break
                 case "GridSizeChanged()":
                     store.setGrid(res.gameField.grid.cells.length, res.gameField.grid.cells)
-                    store.setPile(res.gameField.pile.length)
+                    store.setPile(res.gameField.pile)
+                    store.setHandAndPoint(res.gameField.playerList.A, res.gameField.playerList.B)
+                    store.setTurn(res.status)
                     break
                 default:
                     store.setGrid(res.gameField.grid.cells.length, res.gameField.grid.cells)
-                    store.setPile(res.gameField.pile.length)
+                    store.setPile(res.gameField.pile)
                     store.setHandAndPoint(res.gameField.playerList.A, res.gameField.playerList.B)
                     store.setTurn(res.status)
-                    console.log(store.state.cells)
-
             }
         }
     };
-
-    window.onbeforeunload = function (){
-        websocket.send("disconnected player " + client_player)
-    }
 }
 
 $( document ).ready(function() {
