@@ -5,7 +5,7 @@ $(document).ready(function(){
         el: '#app',
         template: `
         <div>
-            <div class="container my-4">
+            <div class="container my-2">
                 <div class="row">
                     <div class="col">
                         <v-grid/>
@@ -24,7 +24,7 @@ $(document).ready(function(){
 
 Vue.component('v-grid', {
     template: `
-        <div class="myGrid bg-white rounded card">
+        <div class="myGrid bg-white rounded card my-2">
              <div class="myRow">
              <div class="myCell myLabel"> </div>
                 <div v-for="(n, i) in size" class="myCell myLabel">
@@ -100,26 +100,22 @@ Vue.component('v-player-chooser', {
 
 Vue.component('v-info', {
     template: `<div class="info">
-                    <div class="mb-2">
-                        <div class="row">
-                            <div class="col pr-1">
-                                <div class="card p-3 bg-white rounded" :class="{active: isPlayerA}">
-                                    Player A: <span class="playerpoint">{{point.A}}</span>
-                                </div>
+                    <div class="my-2 row">
+                        <div class="col pr-1">
+                            <div class="card p-3 bg-white rounded" :class="{active: isPlayerA}">
+                                Player A: <span class="playerpoint">{{point.A}}</span>
                             </div>
-                            <div class="col pl-1">
-                                <div class="card p-3 bg-white rounded" :class="{active: !isPlayerA}">
-                                    Player B: <span class="playerpoint">{{point.B}}</span>
-                                </div>
+                        </div>
+                        <div class="col pl-1">
+                            <div class="card p-3 bg-white rounded" :class="{active: !isPlayerA}">
+                                Player B: <span class="playerpoint">{{point.B}}</span>
                             </div>
                         </div>
                     </div>
-                    <div class="my-2">
-                        <div class="card bg-white p-3">
-                            <p>cards in stack: {{pile}}</p>
-                            <p>you are player: {{player}}</p>
-                            <v-player-chooser/>
-                        </div>
+                    <div class="card bg-white my-2 p-3">
+                        <p>cards in stack: {{pile}}</p>
+                        <p>you are player: {{player}}</p>
+                        <v-player-chooser/>
                     </div>
                     <v-buttons/>
                 </div>
@@ -134,7 +130,7 @@ Vue.component('v-info', {
 
 Vue.component('v-buttons', {
     template: `
-        <div class="my-2">
+        <div v-if="player === turn" class="my-2">
             <div class="row">
                 <div class="col">
                     <button type="button" class="btn btn-primary btn-block text-left" @click="newgame">
@@ -166,7 +162,7 @@ Vue.component('v-buttons', {
                             <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
                             <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
                         </svg> switch cards</button>
-                    <button v-if="player === turn" type="button" class="btn btn-success btn-block text-left" @click="submit">
+                    <button type="button" class="btn btn-success btn-block text-left" @click="submit">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-check-square-fill" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
                         </svg> submit</button>
