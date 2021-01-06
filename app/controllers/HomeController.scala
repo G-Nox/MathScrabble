@@ -97,6 +97,19 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit system: ActorS
     listenTo(gamecontroller)
 
     def receive = {
+      case "connect"  =>
+        out ! gamecontroller.memToJson(gamecontroller.createMemento()).toString()
+      case "new"      => gamecontroller.init
+      case "undo"     => gamecontroller.undo
+      case "redo"     => gamecontroller.redo
+      case "submit"   => gamecontroller.endTurn
+      case input: String if input.contains("/") =>
+        val request = input.split("/")
+        request(0) match {
+          case "switch" => gamecontroller.changeHand(request.last)
+          case "set" => gamecontroller.setGrid(request(1).toInt, request(2).toInt, request(3).toInt)
+          case "resize" => gamecontroller.createFixedSizeGameField(request.last.toInt)
+        }
       case msg: String =>
         out ! gamecontroller.memToJson(gamecontroller.createMemento()).toString()
         println("Sent Json to Client" + msg)
