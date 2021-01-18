@@ -103,7 +103,7 @@ function connectWebSocket() {
 }
 
 $( document ).ready(function() {
-    connectWebSocket()
+    // connectWebSocket()
 });
 
 export default store;

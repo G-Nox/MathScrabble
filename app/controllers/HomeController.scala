@@ -96,9 +96,10 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit system: ActorS
   class ScrabbleWebSocketActorFactory(out: ActorRef) extends Actor with Reactor {
     listenTo(gamecontroller)
 
-    def receive = {
+    def receive: Receive = {
       case "connect"  =>
         out ! gamecontroller.memToJson(gamecontroller.createMemento()).toString()
+        println("Connect successful")
       case "new"      => gamecontroller.init
       case "undo"     => gamecontroller.undo
       case "redo"     => gamecontroller.redo
@@ -109,6 +110,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit system: ActorS
           case "switch" => gamecontroller.changeHand(request.last)
           case "set" => gamecontroller.setGrid(request(1).toInt, request(2).toInt, request(3).toInt)
           case "resize" => gamecontroller.createFixedSizeGameField(request.last.toInt)
+            gamecontroller.changeHand("A")
         }
       case msg: String =>
         out ! gamecontroller.memToJson(gamecontroller.createMemento()).toString()
