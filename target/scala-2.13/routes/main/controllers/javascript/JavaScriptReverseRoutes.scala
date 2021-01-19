@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
-// @SOURCE:C:/Users/G_PC/Desktop/Scrabble/play-silhouette-seed-master/conf/routes
-// @DATE:Mon Jan 18 17:25:24 CET 2021
+// @SOURCE:D:/htwg/webtech/Play_Scrabble/conf/routes
+// @DATE:Tue Jan 19 18:35:20 CET 2021
 
 import play.api.routing.JavaScriptReverseRoute
 
@@ -285,6 +285,36 @@ package controllers.javascript {
       """
         function() {
           return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "password/forgot"})
+        }
+      """
+    )
+  
+  }
+
+  // @LINE:49
+  class ReverseHomeController(_prefix: => String) {
+
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:49
+    def gridToJson: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.gridToJson",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "json"})
+        }
+      """
+    )
+  
+    // @LINE:51
+    def socket: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.socket",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "websocket"})
         }
       """
     )

@@ -11,7 +11,8 @@ object resetPassword extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.
       {
 
 
-Seq[Any](_display_(/*4.2*/messages("email.reset.password.hello", user.name.getOrElse("user"))),format.raw/*4.69*/("""
+Seq[Any](format.raw/*3.63*/("""
+"""),_display_(/*4.2*/messages("email.reset.password.hello", user.name.getOrElse("user"))),format.raw/*4.69*/("""
 
 """),_display_(/*6.2*/messages("email.reset.password.txt.text", url)),format.raw/*6.48*/("""
 """))
@@ -30,11 +31,11 @@ Seq[Any](_display_(/*4.2*/messages("email.reset.password.hello", user.name.getOr
 
               /*
                   -- GENERATED --
-                  DATE: 2021-01-18T17:25:25.294822200
-                  SOURCE: C:/Users/G_PC/Desktop/Scrabble/play-silhouette-seed-master/app/views/emails/resetPassword.scala.txt
-                  HASH: 20e040ce32e5d1d63dcf02402aef41c710d1b8db
-                  MATRIX: 34->1|393->33|547->96|634->163|662->166|728->212
-                  LINES: 4->1|9->3|14->4|14->4|16->6|16->6
+                  DATE: 2021-01-19T18:31:24.625944200
+                  SOURCE: D:/htwg/webtech/Play_Scrabble/app/views/emails/resetPassword.scala.txt
+                  HASH: 630276eab8154099ec6b4c45c372c96cb7b7546f
+                  MATRIX: 34->1|393->35|548->96|576->99|663->166|693->171|759->217
+                  LINES: 4->1|9->3|14->3|15->4|15->4|17->6|17->6
                   -- GENERATED --
               */
           

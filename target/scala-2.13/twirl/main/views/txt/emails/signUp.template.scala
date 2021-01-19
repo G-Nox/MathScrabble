@@ -11,7 +11,8 @@ object signUp extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.Txt
       {
 
 
-Seq[Any](_display_(/*4.2*/messages("email.sign.up.hello", user.name.getOrElse("user"))),format.raw/*4.62*/("""
+Seq[Any](format.raw/*3.63*/("""
+"""),_display_(/*4.2*/messages("email.sign.up.hello", user.name.getOrElse("user"))),format.raw/*4.62*/("""
 
 """),_display_(/*6.2*/messages("email.sign.up.txt.text", url)),format.raw/*6.41*/("""
 """))
@@ -30,11 +31,11 @@ Seq[Any](_display_(/*4.2*/messages("email.sign.up.hello", user.name.getOrElse("u
 
               /*
                   -- GENERATED --
-                  DATE: 2021-01-18T17:25:25.309822
-                  SOURCE: C:/Users/G_PC/Desktop/Scrabble/play-silhouette-seed-master/app/views/emails/signUp.scala.txt
-                  HASH: 98e25310caa4973ebb569176afaaa73c814c2a5a
-                  MATRIX: 34->1|386->33|540->96|620->156|648->159|707->198
-                  LINES: 4->1|9->3|14->4|14->4|16->6|16->6
+                  DATE: 2021-01-19T18:31:24.653871
+                  SOURCE: D:/htwg/webtech/Play_Scrabble/app/views/emails/signUp.scala.txt
+                  HASH: 8799d0f5319e455d813f5bf0ebe3bdd32310e662
+                  MATRIX: 34->1|386->35|541->96|569->99|649->159|679->164|738->203
+                  LINES: 4->1|9->3|14->3|15->4|15->4|17->6|17->6
                   -- GENERATED --
               */
           

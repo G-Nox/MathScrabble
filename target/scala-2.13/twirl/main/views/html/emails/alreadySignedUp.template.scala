@@ -12,7 +12,8 @@ object alreadySignedUp extends _root_.play.twirl.api.BaseScalaTemplate[play.twir
       {
 
 
-Seq[Any](format.raw/*5.1*/("""
+Seq[Any](format.raw/*4.63*/("""
+
 """),format.raw/*6.1*/("""<html>
     <body>
         <p>"""),_display_(/*8.13*/messages("email.already.signed.up.hello", user.name.getOrElse("user"))),format.raw/*8.83*/("""</p>
@@ -35,11 +36,11 @@ Seq[Any](format.raw/*5.1*/("""
 
               /*
                   -- GENERATED --
-                  DATE: 2021-01-18T17:25:25.275821400
-                  SOURCE: C:/Users/G_PC/Desktop/Scrabble/play-silhouette-seed-master/app/views/emails/alreadySignedUp.scala.html
-                  HASH: 76ab06ca8f7747af1078b668401996f9aecb3240
-                  MATRIX: 35->1|72->32|434->61|589->123|616->124|672->154|762->224|805->241|881->297
-                  LINES: 4->1|5->2|10->4|15->5|16->6|18->8|18->8|19->9|19->9
+                  DATE: 2021-01-19T18:31:24.562115500
+                  SOURCE: D:/htwg/webtech/Play_Scrabble/app/views/emails/alreadySignedUp.scala.html
+                  HASH: b7ab7671231460af25c0f5df298d11e2612463ac
+                  MATRIX: 35->1|72->33|434->64|590->125|620->129|678->161|768->231|812->249|888->305
+                  LINES: 4->1|5->2|10->4|15->4|17->6|19->8|19->8|20->9|20->9
                   -- GENERATED --
               */
           

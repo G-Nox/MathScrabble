@@ -1,6 +1,6 @@
-[0m[[0m[0mdebug[0m] [0m[0mCopy resource mappings: [0m
-[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\G_PC\Desktop\Scrabble\play-silhouette-seed-master\conf\application.conf,C:\Users\G_PC\Desktop\Scrabble\play-silhouette-seed-master\target\scala-2.13\classes\application.conf)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\G_PC\Desktop\Scrabble\play-silhouette-seed-master\conf\application.prod.conf,C:\Users\G_PC\Desktop\Scrabble\play-silhouette-seed-master\target\scala-2.13\classes\application.prod.conf)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\G_PC\Desktop\Scrabble\play-silhouette-seed-master\conf\messages,C:\Users\G_PC\Desktop\Scrabble\play-silhouette-seed-master\target\scala-2.13\classes\messages)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\G_PC\Desktop\Scrabble\play-silhouette-seed-master\conf\routes,C:\Users\G_PC\Desktop\Scrabble\play-silhouette-seed-master\target\scala-2.13\classes\routes)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\G_PC\Desktop\Scrabble\play-silhouette-seed-master\conf\silhouette.conf,C:\Users\G_PC\Desktop\Scrabble\play-silhouette-seed-master\target\scala-2.13\classes\silhouette.conf)[0m
+[debug] Copy resource mappings: 
+[debug] 	(D:\htwg\webtech\Play_Scrabble\conf\application.conf,D:\htwg\webtech\Play_Scrabble\target\scala-2.13\classes\application.conf)
+[debug] 	(D:\htwg\webtech\Play_Scrabble\conf\application.prod.conf,D:\htwg\webtech\Play_Scrabble\target\scala-2.13\classes\application.prod.conf)
+[debug] 	(D:\htwg\webtech\Play_Scrabble\conf\messages,D:\htwg\webtech\Play_Scrabble\target\scala-2.13\classes\messages)
+[debug] 	(D:\htwg\webtech\Play_Scrabble\conf\routes,D:\htwg\webtech\Play_Scrabble\target\scala-2.13\classes\routes)
+[debug] 	(D:\htwg\webtech\Play_Scrabble\conf\silhouette.conf,D:\htwg\webtech\Play_Scrabble\target\scala-2.13\classes\silhouette.conf)

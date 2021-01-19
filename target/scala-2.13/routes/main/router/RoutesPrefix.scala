@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
-// @SOURCE:C:/Users/G_PC/Desktop/Scrabble/play-silhouette-seed-master/conf/routes
-// @DATE:Mon Jan 18 17:25:24 CET 2021
+// @SOURCE:D:/htwg/webtech/Play_Scrabble/conf/routes
+// @DATE:Tue Jan 19 18:35:20 CET 2021
 
 
 package router {

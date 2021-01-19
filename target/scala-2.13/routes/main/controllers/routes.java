@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
-// @SOURCE:C:/Users/G_PC/Desktop/Scrabble/play-silhouette-seed-master/conf/routes
-// @DATE:Mon Jan 18 17:25:24 CET 2021
+// @SOURCE:D:/htwg/webtech/Play_Scrabble/conf/routes
+// @DATE:Tue Jan 19 18:35:20 CET 2021
 
 package controllers;
 
@@ -17,6 +17,7 @@ public class routes {
   public static final controllers.ReverseApplicationController ApplicationController = new controllers.ReverseApplicationController(RoutesPrefix.byNamePrefix());
   public static final controllers.ReverseActivateAccountController ActivateAccountController = new controllers.ReverseActivateAccountController(RoutesPrefix.byNamePrefix());
   public static final controllers.ReverseForgotPasswordController ForgotPasswordController = new controllers.ReverseForgotPasswordController(RoutesPrefix.byNamePrefix());
+  public static final controllers.ReverseHomeController HomeController = new controllers.ReverseHomeController(RoutesPrefix.byNamePrefix());
   public static final controllers.ReverseChangePasswordController ChangePasswordController = new controllers.ReverseChangePasswordController(RoutesPrefix.byNamePrefix());
   public static final controllers.ReverseSignUpController SignUpController = new controllers.ReverseSignUpController(RoutesPrefix.byNamePrefix());
 
@@ -31,6 +32,7 @@ public class routes {
     public static final controllers.javascript.ReverseApplicationController ApplicationController = new controllers.javascript.ReverseApplicationController(RoutesPrefix.byNamePrefix());
     public static final controllers.javascript.ReverseActivateAccountController ActivateAccountController = new controllers.javascript.ReverseActivateAccountController(RoutesPrefix.byNamePrefix());
     public static final controllers.javascript.ReverseForgotPasswordController ForgotPasswordController = new controllers.javascript.ReverseForgotPasswordController(RoutesPrefix.byNamePrefix());
+    public static final controllers.javascript.ReverseHomeController HomeController = new controllers.javascript.ReverseHomeController(RoutesPrefix.byNamePrefix());
     public static final controllers.javascript.ReverseChangePasswordController ChangePasswordController = new controllers.javascript.ReverseChangePasswordController(RoutesPrefix.byNamePrefix());
     public static final controllers.javascript.ReverseSignUpController SignUpController = new controllers.javascript.ReverseSignUpController(RoutesPrefix.byNamePrefix());
   }

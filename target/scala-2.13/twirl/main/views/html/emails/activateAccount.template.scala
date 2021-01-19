@@ -12,7 +12,8 @@ object activateAccount extends _root_.play.twirl.api.BaseScalaTemplate[play.twir
       {
 
 
-Seq[Any](format.raw/*5.1*/("""
+Seq[Any](format.raw/*4.63*/("""
+
 """),format.raw/*6.1*/("""<html>
     <body>
         <p>"""),_display_(/*8.13*/messages("email.activate.account.hello", user.name.getOrElse("user"))),format.raw/*8.82*/("""</p>
@@ -35,11 +36,11 @@ Seq[Any](format.raw/*5.1*/("""
 
               /*
                   -- GENERATED --
-                  DATE: 2021-01-18T17:25:25.260821700
-                  SOURCE: C:/Users/G_PC/Desktop/Scrabble/play-silhouette-seed-master/app/views/emails/activateAccount.scala.html
-                  HASH: 262b54a39d94bdde717d74f5f4932696e772dc30
-                  MATRIX: 35->1|72->32|434->61|589->123|616->124|672->154|761->223|804->240|879->295
-                  LINES: 4->1|5->2|10->4|15->5|16->6|18->8|18->8|19->9|19->9
+                  DATE: 2021-01-19T18:31:24.516238400
+                  SOURCE: D:/htwg/webtech/Play_Scrabble/app/views/emails/activateAccount.scala.html
+                  HASH: ea6a576adaae55240d35a512700e6a809121660f
+                  MATRIX: 35->1|72->33|434->64|590->125|620->129|678->161|767->230|811->248|886->303
+                  LINES: 4->1|5->2|10->4|15->4|17->6|19->8|19->8|20->9|20->9
                   -- GENERATED --
               */
           

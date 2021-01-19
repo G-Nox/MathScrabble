@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
-// @SOURCE:C:/Users/G_PC/Desktop/Scrabble/play-silhouette-seed-master/conf/routes
-// @DATE:Mon Jan 18 17:25:24 CET 2021
+// @SOURCE:D:/htwg/webtech/Play_Scrabble/conf/routes
+// @DATE:Tue Jan 19 18:35:20 CET 2021
 
 import play.api.mvc.Call
 
@@ -202,6 +202,27 @@ package controllers {
     def submit(): Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "password/forgot")
+    }
+  
+  }
+
+  // @LINE:49
+  class ReverseHomeController(_prefix: => String) {
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:49
+    def gridToJson(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "json")
+    }
+  
+    // @LINE:51
+    def socket(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "websocket")
     }
   
   }

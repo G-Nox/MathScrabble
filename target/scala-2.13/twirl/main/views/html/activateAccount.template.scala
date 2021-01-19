@@ -16,7 +16,8 @@ class activateAccount @javax.inject.Inject() /*7.6*/()(implicit webJarsUtil: Web
       {
 
 
-Seq[Any](format.raw/*9.1*/("""
+Seq[Any](format.raw/*8.70*/("""
+
 """),_display_(/*10.2*/main(messages("activate.account.title"))/*10.42*/ {_display_(Seq[Any](format.raw/*10.44*/("""
     """),format.raw/*11.5*/("""<fieldset class="col-md-6 col-md-offset-3">
         <legend>"""),_display_(/*12.18*/messages("activate.account")),format.raw/*12.46*/("""</legend>
@@ -44,11 +45,11 @@ Seq[Any](format.raw/*9.1*/("""
 
               /*
                   -- GENERATED --
-                  DATE: 2021-01-18T17:25:25.237823
-                  SOURCE: C:/Users/G_PC/Desktop/Scrabble/play-silhouette-seed-master/app/views/activateAccount.scala.html
-                  HASH: f3ffbf1f0cb9aeebc245325d6a5ec90573a6f96f
-                  MATRIX: 28->1|65->32|106->67|140->95|183->132|273->170|646->231|808->300|836->302|885->342|925->344|957->349|1045->410|1094->438|1174->491|1229->525|1280->549|1306->554|1358->579|1413->613|1461->634|1599->750|1666->787
-                  LINES: 4->1|5->2|6->3|7->4|8->5|11->7|14->8|19->9|20->10|20->10|20->10|21->11|22->12|22->12|24->14|24->14|25->15|25->15|26->16|26->16|27->17|27->17|30->20
+                  DATE: 2021-01-19T18:31:24.444431700
+                  SOURCE: D:/htwg/webtech/Play_Scrabble/app/views/activateAccount.scala.html
+                  HASH: f687e5b6c6aee512e457cdb7e3eb0717e4f50f5a
+                  MATRIX: 28->1|65->33|106->69|140->98|183->136|273->176|646->238|809->306|840->311|889->351|929->353|962->359|1051->421|1100->449|1182->504|1237->538|1289->563|1315->568|1368->594|1423->628|1472->650|1610->766|1680->806
+                  LINES: 4->1|5->2|6->3|7->4|8->5|11->7|14->8|19->8|21->10|21->10|21->10|22->11|23->12|23->12|25->14|25->14|26->15|26->15|27->16|27->16|28->17|28->17|31->20
                   -- GENERATED --
               */
           
