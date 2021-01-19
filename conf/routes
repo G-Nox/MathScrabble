@@ -1,6 +1,5 @@
 # Routes
 # This file defines all application routes (Higher priority routes first)
-# https://www.playframework.com/documentation/latest/ScalaRouting
 # ~~~~
 
 # Home page
@@ -33,8 +32,11 @@ POST        /password/change                 controllers.ChangePasswordControlle
 GET         /account/email/:email            controllers.ActivateAccountController.send(email: String)
 GET         /account/activate/:token         controllers.ActivateAccountController.activate(token: java.util.UUID)
 
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file                    controllers.Assets.versioned(file)
+->          /webjars                         webjars.Routes
+
 #scrabble
-#GET     /home                           controllers.HomeController.index
 GET     /scrabble                   controllers.HomeController.scrabble
 GET     /scrabble/new               controllers.HomeController.newGrid
 GET     /scrabble/submit            controllers.HomeController.submit
@@ -49,5 +51,4 @@ GET     /json                       controllers.HomeController.gridToJson
 GET     /websocket                  controllers.HomeController.socket
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file                    controllers.Assets.versioned(file)
-->          /webjars                         webjars.Routes
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

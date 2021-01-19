@@ -9,7 +9,7 @@ import play.api.libs.streams.ActorFlow
 import akka.actor.ActorSystem
 import akka.stream.Materializer
 import akka.actor._
-import de.htwg.se.scrabble.controller.controllerComponent.{ CardsChanged, ControllerInterface, GameFieldChanged, GridSizeChanged, InvalidEquation }
+import de.htwg.se.scrabble.controller.controllerComponent.{CardsChanged, ControllerInterface, GameFieldChanged, GridSizeChanged, InvalidEquation}
 import play.api.libs.json.Json
 
 import scala.swing.Reactor
@@ -19,7 +19,7 @@ import scala.swing.Reactor
  * application's home page.
  */
 @Singleton
-class HomeController @Inject() (cc: ControllerComponents)(implicit system: ActorSystem, mat: Materializer) extends AbstractController(cc) {
+class HomeController @Inject()(cc: ControllerComponents)(implicit system: ActorSystem, mat: Materializer) extends AbstractController(cc) {
 
   val gamecontroller: ControllerInterface = Scrabble.controller
   var players: List[String] = List()
@@ -33,9 +33,9 @@ class HomeController @Inject() (cc: ControllerComponents)(implicit system: Actor
    * will be called when the application receives a `GET` request with
    * a path of `/`.
    */
-//  def index() = Action { implicit request: Request[AnyContent] =>
-//    Ok(views.html.index())
-//  }
+  def index() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.index())
+  }
 
   def scrabble() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.scrabble())
@@ -97,20 +97,19 @@ class HomeController @Inject() (cc: ControllerComponents)(implicit system: Actor
     listenTo(gamecontroller)
 
     def receive: Receive = {
-      case "connect" =>
+      case "connect"  =>
         out ! gamecontroller.memToJson(gamecontroller.createMemento()).toString()
         println("Connect successful")
-      case "new" => gamecontroller.init
-      case "undo" => gamecontroller.undo
-      case "redo" => gamecontroller.redo
-      case "submit" => gamecontroller.endTurn
+      case "new"      => gamecontroller.init
+      case "undo"     => gamecontroller.undo
+      case "redo"     => gamecontroller.redo
+      case "submit"   => gamecontroller.endTurn
       case input: String if input.contains("/") =>
         val request = input.split("/")
         request(0) match {
           case "switch" => gamecontroller.changeHand(request.last)
           case "set" => gamecontroller.setGrid(request(1).toInt, request(2).toInt, request(3).toInt)
-          case "resize" =>
-            gamecontroller.createFixedSizeGameField(request.last.toInt)
+          case "resize" => gamecontroller.createFixedSizeGameField(request.last.toInt)
             gamecontroller.changeHand("A")
         }
       case msg: String =>
@@ -127,7 +126,7 @@ class HomeController @Inject() (cc: ControllerComponents)(implicit system: Actor
 
     def sendJsonToClient(event: scala.swing.event.Event) = {
       println("Received event from Controller")
-      out ! (gamecontroller.memToJson(gamecontroller.createMemento(), event).toString())
+      out ! (gamecontroller.memToJson(gamecontroller.createMemento(),event).toString())
     }
   }
 
