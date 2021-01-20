@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
 // @SOURCE:D:/htwg/webtech/Play_Scrabble/conf/routes
-// @DATE:Tue Jan 19 18:35:20 CET 2021
+// @DATE:Tue Jan 19 20:00:38 CET 2021
 
 import play.api.routing.JavaScriptReverseRoute
 
@@ -11,7 +11,7 @@ import _root_.utils.route.Binders._
 // @LINE:6
 package controllers.javascript {
 
-  // @LINE:36
+  // @LINE:39
   class ReverseAssets(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -19,7 +19,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:36
+    // @LINE:39
     def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Assets.versioned",
       """
@@ -291,7 +291,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:49
+  // @LINE:35
   class ReverseHomeController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -299,7 +299,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:49
+    // @LINE:35
     def gridToJson: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.gridToJson",
       """
@@ -309,7 +309,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:51
+    // @LINE:36
     def socket: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.socket",
       """

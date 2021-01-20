@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
 // @SOURCE:D:/htwg/webtech/Play_Scrabble/conf/routes
-// @DATE:Tue Jan 19 18:35:20 CET 2021
+// @DATE:Tue Jan 19 20:00:38 CET 2021
 
 import play.api.mvc.Call
 
@@ -11,14 +11,14 @@ import _root_.utils.route.Binders._
 // @LINE:6
 package controllers {
 
-  // @LINE:36
+  // @LINE:39
   class ReverseAssets(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:36
+    // @LINE:39
     def versioned(file:String): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[play.api.mvc.PathBindable[String]].unbind("file", file))
@@ -206,20 +206,20 @@ package controllers {
   
   }
 
-  // @LINE:49
+  // @LINE:35
   class ReverseHomeController(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:49
+    // @LINE:35
     def gridToJson(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "json")
     }
   
-    // @LINE:51
+    // @LINE:36
     def socket(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "websocket")

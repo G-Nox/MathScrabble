@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
 // @SOURCE:D:/htwg/webtech/Play_Scrabble/conf/routes
-// @DATE:Tue Jan 19 18:35:20 CET 2021
+// @DATE:Tue Jan 19 20:00:38 CET 2021
 
 
 package router {

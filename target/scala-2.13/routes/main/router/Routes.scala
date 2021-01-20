@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
 // @SOURCE:D:/htwg/webtech/Play_Scrabble/conf/routes
-// @DATE:Tue Jan 19 18:35:20 CET 2021
+// @DATE:Tue Jan 19 20:00:38 CET 2021
 
 package router
 
@@ -34,12 +34,12 @@ class Routes(
   ChangePasswordController_3: controllers.ChangePasswordController,
   // @LINE:32
   ActivateAccountController_9: controllers.ActivateAccountController,
-  // @LINE:36
-  Assets_10: controllers.Assets,
-  // @LINE:37
-  webjars_Routes_0: webjars.Routes,
-  // @LINE:49
+  // @LINE:35
   HomeController_11: controllers.HomeController,
+  // @LINE:39
+  Assets_10: controllers.Assets,
+  // @LINE:40
+  webjars_Routes_0: webjars.Routes,
   val prefix: String
 ) extends GeneratedRouter {
 
@@ -65,18 +65,18 @@ class Routes(
     ChangePasswordController_3: controllers.ChangePasswordController,
     // @LINE:32
     ActivateAccountController_9: controllers.ActivateAccountController,
-    // @LINE:36
+    // @LINE:35
+    HomeController_11: controllers.HomeController,
+    // @LINE:39
     Assets_10: controllers.Assets,
-    // @LINE:37
-    webjars_Routes_0: webjars.Routes,
-    // @LINE:49
-    HomeController_11: controllers.HomeController
-  ) = this(errorHandler, ApplicationController_7, SocialAuthController_0, SignUpController_8, SignInController_1, TotpController_2, TotpRecoveryController_6, ForgotPasswordController_4, ResetPasswordController_5, ChangePasswordController_3, ActivateAccountController_9, Assets_10, webjars_Routes_0, HomeController_11, "/")
+    // @LINE:40
+    webjars_Routes_0: webjars.Routes
+  ) = this(errorHandler, ApplicationController_7, SocialAuthController_0, SignUpController_8, SignInController_1, TotpController_2, TotpRecoveryController_6, ForgotPasswordController_4, ResetPasswordController_5, ChangePasswordController_3, ActivateAccountController_9, HomeController_11, Assets_10, webjars_Routes_0, "/")
 
   def withPrefix(addPrefix: String): Routes = {
     val prefix = play.api.routing.Router.concatPrefix(addPrefix, this.prefix)
     router.RoutesPrefix.setPrefix(prefix)
-    new Routes(errorHandler, ApplicationController_7, SocialAuthController_0, SignUpController_8, SignInController_1, TotpController_2, TotpRecoveryController_6, ForgotPasswordController_4, ResetPasswordController_5, ChangePasswordController_3, ActivateAccountController_9, Assets_10, webjars_Routes_0, HomeController_11, prefix)
+    new Routes(errorHandler, ApplicationController_7, SocialAuthController_0, SignUpController_8, SignInController_1, TotpController_2, TotpRecoveryController_6, ForgotPasswordController_4, ResetPasswordController_5, ChangePasswordController_3, ActivateAccountController_9, HomeController_11, Assets_10, webjars_Routes_0, prefix)
   }
 
   private[this] val defaultPrefix: String = {
@@ -106,10 +106,10 @@ class Routes(
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """password/change""", """controllers.ChangePasswordController.submit"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """account/email/""" + "$" + """email<[^/]+>""", """controllers.ActivateAccountController.send(email:String)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """account/activate/""" + "$" + """token<[^/]+>""", """controllers.ActivateAccountController.activate(token:java.util.UUID)"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """assets/""" + "$" + """file<.+>""", """controllers.Assets.versioned(file:String)"""),
-    prefixed_webjars_Routes_0_23.router.documentation,
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """json""", """controllers.HomeController.gridToJson"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """websocket""", """controllers.HomeController.socket"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """assets/""" + "$" + """file<.+>""", """controllers.Assets.versioned(file:String)"""),
+    prefixed_webjars_Routes_0_25.router.documentation,
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
     case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
@@ -513,32 +513,11 @@ class Routes(
     )
   )
 
-  // @LINE:36
-  private[this] lazy val controllers_Assets_versioned22_route = Route("GET",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("assets/"), DynamicPart("file", """.+""",false)))
-  )
-  private[this] lazy val controllers_Assets_versioned22_invoker = createInvoker(
-    Assets_10.versioned(fakeValue[String]),
-    play.api.routing.HandlerDef(this.getClass.getClassLoader,
-      "router",
-      "controllers.Assets",
-      "versioned",
-      Seq(classOf[String]),
-      "GET",
-      this.prefix + """assets/""" + "$" + """file<.+>""",
-      """ Map static resources from the /public folder to the /assets URL path""",
-      Seq()
-    )
-  )
-
-  // @LINE:37
-  private[this] val prefixed_webjars_Routes_0_23 = Include(webjars_Routes_0.withPrefix(this.prefix + (if (this.prefix.endsWith("/")) "" else "/") + "webjars"))
-
-  // @LINE:49
-  private[this] lazy val controllers_HomeController_gridToJson24_route = Route("GET",
+  // @LINE:35
+  private[this] lazy val controllers_HomeController_gridToJson22_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("json")))
   )
-  private[this] lazy val controllers_HomeController_gridToJson24_invoker = createInvoker(
+  private[this] lazy val controllers_HomeController_gridToJson22_invoker = createInvoker(
     HomeController_11.gridToJson,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -552,11 +531,11 @@ class Routes(
     )
   )
 
-  // @LINE:51
-  private[this] lazy val controllers_HomeController_socket25_route = Route("GET",
+  // @LINE:36
+  private[this] lazy val controllers_HomeController_socket23_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("websocket")))
   )
-  private[this] lazy val controllers_HomeController_socket25_invoker = createInvoker(
+  private[this] lazy val controllers_HomeController_socket23_invoker = createInvoker(
     HomeController_11.socket,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -569,6 +548,27 @@ class Routes(
       Seq()
     )
   )
+
+  // @LINE:39
+  private[this] lazy val controllers_Assets_versioned24_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("assets/"), DynamicPart("file", """.+""",false)))
+  )
+  private[this] lazy val controllers_Assets_versioned24_invoker = createInvoker(
+    Assets_10.versioned(fakeValue[String]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.Assets",
+      "versioned",
+      Seq(classOf[String]),
+      "GET",
+      this.prefix + """assets/""" + "$" + """file<.+>""",
+      """ Map static resources from the /public folder to the /assets URL path""",
+      Seq()
+    )
+  )
+
+  // @LINE:40
+  private[this] val prefixed_webjars_Routes_0_25 = Include(webjars_Routes_0.withPrefix(this.prefix + (if (this.prefix.endsWith("/")) "" else "/") + "webjars"))
 
 
   def routes: PartialFunction[RequestHeader, Handler] = {
@@ -705,25 +705,25 @@ class Routes(
         controllers_ActivateAccountController_activate21_invoker.call(ActivateAccountController_9.activate(token))
       }
   
+    // @LINE:35
+    case controllers_HomeController_gridToJson22_route(params@_) =>
+      call { 
+        controllers_HomeController_gridToJson22_invoker.call(HomeController_11.gridToJson)
+      }
+  
     // @LINE:36
-    case controllers_Assets_versioned22_route(params@_) =>
+    case controllers_HomeController_socket23_route(params@_) =>
+      call { 
+        controllers_HomeController_socket23_invoker.call(HomeController_11.socket)
+      }
+  
+    // @LINE:39
+    case controllers_Assets_versioned24_route(params@_) =>
       call(params.fromPath[String]("file", None)) { (file) =>
-        controllers_Assets_versioned22_invoker.call(Assets_10.versioned(file))
+        controllers_Assets_versioned24_invoker.call(Assets_10.versioned(file))
       }
   
-    // @LINE:37
-    case prefixed_webjars_Routes_0_23(handler) => handler
-  
-    // @LINE:49
-    case controllers_HomeController_gridToJson24_route(params@_) =>
-      call { 
-        controllers_HomeController_gridToJson24_invoker.call(HomeController_11.gridToJson)
-      }
-  
-    // @LINE:51
-    case controllers_HomeController_socket25_route(params@_) =>
-      call { 
-        controllers_HomeController_socket25_invoker.call(HomeController_11.socket)
-      }
+    // @LINE:40
+    case prefixed_webjars_Routes_0_25(handler) => handler
   }
 }
