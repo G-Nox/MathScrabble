@@ -34,7 +34,7 @@ class SocialAuthController @Inject() (
             authInfo <- authInfoRepository.save(profile.loginInfo, authInfo)
             authenticator <- authenticatorService.create(profile.loginInfo)
             value <- authenticatorService.init(authenticator)
-            result <- authenticatorService.embed(value, Redirect("http://127.0.0.1:8887/"))
+            result <- authenticatorService.embed(value, Redirect("https://math-scrabble-frontend.herokuapp.com/"))
           } yield {
             eventBus.publish(LoginEvent(user, request))
             result
