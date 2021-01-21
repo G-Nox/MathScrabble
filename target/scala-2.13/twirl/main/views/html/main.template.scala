@@ -48,53 +48,54 @@ Seq[Any](format.raw/*8.167*/("""
                     <div class="navbar-nav">
                         <a class="nav-item nav-link" href=""""),_display_(/*38.61*/controllers/*38.72*/.routes.ApplicationController.index),format.raw/*38.107*/("""">"""),_display_(/*38.110*/messages("home")),format.raw/*38.126*/("""</a>
                         <a class="nav-item nav-link" href="https://github.com/mohiva/play-silhouette-seed">GitHub</a>
+                        <a class="nav-item nav-link" href="https://math-scrabble-frontend.herokuapp.com/">Math-Scrabble</a>
                     </div>
                 </div>
 
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup2">
                     <div class="navbar-nav">
-                        """),_display_(/*45.26*/user/*45.30*/.map/*45.34*/ { u =>_display_(Seq[Any](format.raw/*45.41*/("""
-                        """),format.raw/*46.25*/("""<a class="nav-link" href=""""),_display_(/*46.52*/controllers/*46.63*/.routes.ApplicationController.index),format.raw/*46.98*/("""">"""),_display_(/*46.101*/u/*46.102*/.name),format.raw/*46.107*/("""</a>
-                        """),_display_(/*47.26*/if(u.loginInfo.providerID == com.mohiva.play.silhouette.impl.providers.CredentialsProvider.ID)/*47.120*/ {_display_(Seq[Any](format.raw/*47.122*/("""
-                        """),format.raw/*48.25*/("""<a class="nav-item nav-link" href=""""),_display_(/*48.61*/controllers/*48.72*/.routes.ChangePasswordController.view),format.raw/*48.109*/("""">"""),_display_(/*48.112*/messages("change.password")),format.raw/*48.139*/("""</a>
-                        """)))}),format.raw/*49.26*/("""
-                        """),format.raw/*50.25*/("""<a class="nav-item nav-link" href=""""),_display_(/*50.61*/controllers/*50.72*/.routes.ApplicationController.signOut),format.raw/*50.109*/("""">"""),_display_(/*50.112*/messages("sign.out")),format.raw/*50.132*/("""</a>
-                        """)))}/*51.26*/.getOrElse/*51.36*/ {_display_(Seq[Any](format.raw/*51.38*/("""
-                        """),format.raw/*52.25*/("""<a class="nav-item nav-link" href=""""),_display_(/*52.61*/controllers/*52.72*/.routes.SignInController.view),format.raw/*52.101*/("""">"""),_display_(/*52.104*/messages("sign.in")),format.raw/*52.123*/("""</a>
-                        <a class="nav-item nav-link" href=""""),_display_(/*53.61*/controllers/*53.72*/.routes.SignUpController.view),format.raw/*53.101*/("""">"""),_display_(/*53.104*/messages("sign.up")),format.raw/*53.123*/("""</a>
-                        """)))}),format.raw/*54.26*/("""
-                    """),format.raw/*55.21*/("""</div>
+                        """),_display_(/*46.26*/user/*46.30*/.map/*46.34*/ { u =>_display_(Seq[Any](format.raw/*46.41*/("""
+                        """),format.raw/*47.25*/("""<a class="nav-link" href=""""),_display_(/*47.52*/controllers/*47.63*/.routes.ApplicationController.index),format.raw/*47.98*/("""">"""),_display_(/*47.101*/u/*47.102*/.name),format.raw/*47.107*/("""</a>
+                        """),_display_(/*48.26*/if(u.loginInfo.providerID == com.mohiva.play.silhouette.impl.providers.CredentialsProvider.ID)/*48.120*/ {_display_(Seq[Any](format.raw/*48.122*/("""
+                        """),format.raw/*49.25*/("""<a class="nav-item nav-link" href=""""),_display_(/*49.61*/controllers/*49.72*/.routes.ChangePasswordController.view),format.raw/*49.109*/("""">"""),_display_(/*49.112*/messages("change.password")),format.raw/*49.139*/("""</a>
+                        """)))}),format.raw/*50.26*/("""
+                        """),format.raw/*51.25*/("""<a class="nav-item nav-link" href=""""),_display_(/*51.61*/controllers/*51.72*/.routes.ApplicationController.signOut),format.raw/*51.109*/("""">"""),_display_(/*51.112*/messages("sign.out")),format.raw/*51.132*/("""</a>
+                        """)))}/*52.26*/.getOrElse/*52.36*/ {_display_(Seq[Any](format.raw/*52.38*/("""
+                        """),format.raw/*53.25*/("""<a class="nav-item nav-link" href=""""),_display_(/*53.61*/controllers/*53.72*/.routes.SignInController.view),format.raw/*53.101*/("""">"""),_display_(/*53.104*/messages("sign.in")),format.raw/*53.123*/("""</a>
+                        <a class="nav-item nav-link" href=""""),_display_(/*54.61*/controllers/*54.72*/.routes.SignUpController.view),format.raw/*54.101*/("""">"""),_display_(/*54.104*/messages("sign.up")),format.raw/*54.123*/("""</a>
+                        """)))}),format.raw/*55.26*/("""
+                    """),format.raw/*56.21*/("""</div>
                 </div>
 
             </nav>
         </header>
         <main class="container">
             <div class="starter-template row">
-                """),_display_(/*62.18*/request/*62.25*/.flash.get("error").map/*62.48*/ { msg =>_display_(Seq[Any](format.raw/*62.57*/("""
-                    """),format.raw/*63.21*/("""<div class="col-md-6 col-md-offset-3 alert alert-danger">
+                """),_display_(/*63.18*/request/*63.25*/.flash.get("error").map/*63.48*/ { msg =>_display_(Seq[Any](format.raw/*63.57*/("""
+                    """),format.raw/*64.21*/("""<div class="col-md-6 col-md-offset-3 alert alert-danger">
                         <a href="#" class="close" data-dismiss="alert">&times;</a>
-                        <strong>"""),_display_(/*65.34*/messages("error")),format.raw/*65.51*/("""</strong> """),_display_(/*65.62*/msg),format.raw/*65.65*/("""
-                    """),format.raw/*66.21*/("""</div>
-                """)))}),format.raw/*67.18*/("""
-                """),_display_(/*68.18*/request/*68.25*/.flash.get("info").map/*68.47*/ { msg =>_display_(Seq[Any](format.raw/*68.56*/("""
-                    """),format.raw/*69.21*/("""<div class="col-md-6 col-md-offset-3 alert alert-info">
+                        <strong>"""),_display_(/*66.34*/messages("error")),format.raw/*66.51*/("""</strong> """),_display_(/*66.62*/msg),format.raw/*66.65*/("""
+                    """),format.raw/*67.21*/("""</div>
+                """)))}),format.raw/*68.18*/("""
+                """),_display_(/*69.18*/request/*69.25*/.flash.get("info").map/*69.47*/ { msg =>_display_(Seq[Any](format.raw/*69.56*/("""
+                    """),format.raw/*70.21*/("""<div class="col-md-6 col-md-offset-3 alert alert-info">
                         <a href="#" class="close" data-dismiss="alert">&times;</a>
-                        <strong>"""),_display_(/*71.34*/messages("info")),format.raw/*71.50*/("""</strong> """),_display_(/*71.61*/msg),format.raw/*71.64*/("""
-                    """),format.raw/*72.21*/("""</div>
-                """)))}),format.raw/*73.18*/("""
-                """),_display_(/*74.18*/request/*74.25*/.flash.get("success").map/*74.50*/ { msg =>_display_(Seq[Any](format.raw/*74.59*/("""
-                    """),format.raw/*75.21*/("""<div class="col-md-6 col-md-offset-3 alert alert-success">
+                        <strong>"""),_display_(/*72.34*/messages("info")),format.raw/*72.50*/("""</strong> """),_display_(/*72.61*/msg),format.raw/*72.64*/("""
+                    """),format.raw/*73.21*/("""</div>
+                """)))}),format.raw/*74.18*/("""
+                """),_display_(/*75.18*/request/*75.25*/.flash.get("success").map/*75.50*/ { msg =>_display_(Seq[Any](format.raw/*75.59*/("""
+                    """),format.raw/*76.21*/("""<div class="col-md-6 col-md-offset-3 alert alert-success">
                         <a href="#" class="close" data-dismiss="alert">&times;</a>
-                        <strong>"""),_display_(/*77.34*/messages("success")),format.raw/*77.53*/("""</strong> """),_display_(/*77.64*/msg),format.raw/*77.67*/("""
-                    """),format.raw/*78.21*/("""</div>
-                """)))}),format.raw/*79.18*/("""
-                """),_display_(/*80.18*/content),format.raw/*80.25*/("""
-            """),format.raw/*81.13*/("""</div>
+                        <strong>"""),_display_(/*78.34*/messages("success")),format.raw/*78.53*/("""</strong> """),_display_(/*78.64*/msg),format.raw/*78.67*/("""
+                    """),format.raw/*79.21*/("""</div>
+                """)))}),format.raw/*80.18*/("""
+                """),_display_(/*81.18*/content),format.raw/*81.25*/("""
+            """),format.raw/*82.13*/("""</div>
         </main>
-        """),_display_(/*83.10*/webJarsUtil/*83.21*/.locate("jquery.min.js").script(CSPNonce.attrMap)),format.raw/*83.70*/("""
-        """),_display_(/*84.10*/webJarsUtil/*84.21*/.locate("bootstrap.min.js").script(CSPNonce.attrMap)),format.raw/*84.73*/("""
-        """),format.raw/*85.9*/("""<script """),_display_(/*85.18*/{CSPNonce.attr}),format.raw/*85.33*/(""" """),format.raw/*85.34*/("""src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
-        <script """),_display_(/*86.18*/{CSPNonce.attr}),format.raw/*86.33*/(""" """),format.raw/*86.34*/("""src=""""),_display_(/*86.40*/assets/*86.46*/.path("javascripts/zxcvbnShim.js")),format.raw/*86.80*/(""""></script>
+        """),_display_(/*84.10*/webJarsUtil/*84.21*/.locate("jquery.min.js").script(CSPNonce.attrMap)),format.raw/*84.70*/("""
+        """),_display_(/*85.10*/webJarsUtil/*85.21*/.locate("bootstrap.min.js").script(CSPNonce.attrMap)),format.raw/*85.73*/("""
+        """),format.raw/*86.9*/("""<script """),_display_(/*86.18*/{CSPNonce.attr}),format.raw/*86.33*/(""" """),format.raw/*86.34*/("""src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
+        <script """),_display_(/*87.18*/{CSPNonce.attr}),format.raw/*87.33*/(""" """),format.raw/*87.34*/("""src=""""),_display_(/*87.40*/assets/*87.46*/.path("javascripts/zxcvbnShim.js")),format.raw/*87.80*/(""""></script>
     </body>
 </html>
 """))
@@ -113,11 +114,11 @@ Seq[Any](format.raw/*8.167*/("""
 
               /*
                   -- GENERATED --
-                  DATE: 2021-01-20T18:04:19.441094200
+                  DATE: 2021-01-21T02:02:40.503896500
                   SOURCE: D:/htwg/webtech/Play_Scrabble/app/views/main.scala.html
-                  HASH: ac3ebf0e4ffd81a3fe295f985b54c266301277e2
-                  MATRIX: 28->1|65->33|106->69|140->98|183->136|222->170|625->201|886->366|917->370|1222->648|1237->654|1285->681|1332->701|1358->706|1410->731|1446->746|1475->747|1625->870|1661->885|1690->886|1821->990|1841->1001|1912->1051|1949->1061|1983->1068|2019->1083|2048->1084|2099->1108|2114->1114|2159->1138|2338->1290|2374->1305|2403->1306|2525->1401|2561->1416|2590->1417|3179->1979|3199->1990|3255->2025|3491->2234|3511->2245|3568->2280|3599->2283|3637->2299|3995->2630|4008->2634|4021->2638|4066->2645|4120->2671|4174->2698|4194->2709|4250->2744|4281->2747|4292->2748|4319->2753|4377->2784|4481->2878|4522->2880|4576->2906|4639->2942|4659->2953|4718->2990|4749->2993|4798->3020|4860->3051|4914->3077|4977->3113|4997->3124|5056->3161|5087->3164|5129->3184|5179->3215|5198->3225|5238->3227|5292->3253|5355->3289|5375->3300|5426->3329|5457->3332|5498->3351|5591->3417|5611->3428|5662->3457|5693->3460|5734->3479|5796->3510|5846->3532|6045->3704|6061->3711|6093->3734|6140->3743|6190->3765|6393->3941|6431->3958|6469->3969|6493->3972|6543->3994|6599->4019|6645->4038|6661->4045|6692->4067|6739->4076|6789->4098|6990->4272|7027->4288|7065->4299|7089->4302|7139->4324|7195->4349|7241->4368|7257->4375|7291->4400|7338->4409|7388->4431|7592->4608|7632->4627|7670->4638|7694->4641|7744->4663|7800->4688|7846->4707|7874->4714|7916->4728|7977->4762|7997->4773|8067->4822|8105->4833|8125->4844|8198->4896|8235->4906|8271->4915|8307->4930|8336->4931|8459->5027|8495->5042|8524->5043|8557->5049|8572->5055|8627->5089
-                  LINES: 4->1|5->2|6->3|7->4|8->5|9->6|14->8|19->8|21->10|27->16|27->16|27->16|28->17|28->17|29->18|29->18|29->18|30->19|30->19|30->19|31->20|31->20|31->20|32->21|32->21|32->21|32->21|32->21|32->21|32->21|35->24|35->24|35->24|36->25|36->25|36->25|45->34|45->34|45->34|49->38|49->38|49->38|49->38|49->38|56->45|56->45|56->45|56->45|57->46|57->46|57->46|57->46|57->46|57->46|57->46|58->47|58->47|58->47|59->48|59->48|59->48|59->48|59->48|59->48|60->49|61->50|61->50|61->50|61->50|61->50|61->50|62->51|62->51|62->51|63->52|63->52|63->52|63->52|63->52|63->52|64->53|64->53|64->53|64->53|64->53|65->54|66->55|73->62|73->62|73->62|73->62|74->63|76->65|76->65|76->65|76->65|77->66|78->67|79->68|79->68|79->68|79->68|80->69|82->71|82->71|82->71|82->71|83->72|84->73|85->74|85->74|85->74|85->74|86->75|88->77|88->77|88->77|88->77|89->78|90->79|91->80|91->80|92->81|94->83|94->83|94->83|95->84|95->84|95->84|96->85|96->85|96->85|96->85|97->86|97->86|97->86|97->86|97->86|97->86
+                  HASH: e55d2982cd52a4d664b7a99e1bf1eb9c761612b2
+                  MATRIX: 28->1|65->33|106->69|140->98|183->136|222->170|625->201|886->366|917->370|1222->648|1237->654|1285->681|1332->701|1358->706|1410->731|1446->746|1475->747|1625->870|1661->885|1690->886|1821->990|1841->1001|1912->1051|1949->1061|1983->1068|2019->1083|2048->1084|2099->1108|2114->1114|2159->1138|2338->1290|2374->1305|2403->1306|2525->1401|2561->1416|2590->1417|3179->1979|3199->1990|3255->2025|3491->2234|3511->2245|3568->2280|3599->2283|3637->2299|4120->2755|4133->2759|4146->2763|4191->2770|4245->2796|4299->2823|4319->2834|4375->2869|4406->2872|4417->2873|4444->2878|4502->2909|4606->3003|4647->3005|4701->3031|4764->3067|4784->3078|4843->3115|4874->3118|4923->3145|4985->3176|5039->3202|5102->3238|5122->3249|5181->3286|5212->3289|5254->3309|5304->3340|5323->3350|5363->3352|5417->3378|5480->3414|5500->3425|5551->3454|5582->3457|5623->3476|5716->3542|5736->3553|5787->3582|5818->3585|5859->3604|5921->3635|5971->3657|6170->3829|6186->3836|6218->3859|6265->3868|6315->3890|6518->4066|6556->4083|6594->4094|6618->4097|6668->4119|6724->4144|6770->4163|6786->4170|6817->4192|6864->4201|6914->4223|7115->4397|7152->4413|7190->4424|7214->4427|7264->4449|7320->4474|7366->4493|7382->4500|7416->4525|7463->4534|7513->4556|7717->4733|7757->4752|7795->4763|7819->4766|7869->4788|7925->4813|7971->4832|7999->4839|8041->4853|8102->4887|8122->4898|8192->4947|8230->4958|8250->4969|8323->5021|8360->5031|8396->5040|8432->5055|8461->5056|8584->5152|8620->5167|8649->5168|8682->5174|8697->5180|8752->5214
+                  LINES: 4->1|5->2|6->3|7->4|8->5|9->6|14->8|19->8|21->10|27->16|27->16|27->16|28->17|28->17|29->18|29->18|29->18|30->19|30->19|30->19|31->20|31->20|31->20|32->21|32->21|32->21|32->21|32->21|32->21|32->21|35->24|35->24|35->24|36->25|36->25|36->25|45->34|45->34|45->34|49->38|49->38|49->38|49->38|49->38|57->46|57->46|57->46|57->46|58->47|58->47|58->47|58->47|58->47|58->47|58->47|59->48|59->48|59->48|60->49|60->49|60->49|60->49|60->49|60->49|61->50|62->51|62->51|62->51|62->51|62->51|62->51|63->52|63->52|63->52|64->53|64->53|64->53|64->53|64->53|64->53|65->54|65->54|65->54|65->54|65->54|66->55|67->56|74->63|74->63|74->63|74->63|75->64|77->66|77->66|77->66|77->66|78->67|79->68|80->69|80->69|80->69|80->69|81->70|83->72|83->72|83->72|83->72|84->73|85->74|86->75|86->75|86->75|86->75|87->76|89->78|89->78|89->78|89->78|90->79|91->80|92->81|92->81|93->82|95->84|95->84|95->84|96->85|96->85|96->85|97->86|97->86|97->86|97->86|98->87|98->87|98->87|98->87|98->87|98->87
                   -- GENERATED --
               */
           
